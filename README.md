@@ -24,7 +24,7 @@ Smart Café is a web application that allows customers to order drinks in a cafe
 
 ## Powered by
 
-We are proud to collaborate with our client, Lagoon Cocktail Bar, who helped us in testing and refining the application. Their valuable input and feedback played a crucial role in the development of Smart Caf�, and we are grateful for their support.
+We are proud to collaborate with our client, Lagoon Cocktail Bar, who helped us in testing and refining the application. Their valuable input and feedback played a crucial role in the development of Smart Café, and we are grateful for their support.
 
 The Smart Café team is also grateful to the University of Sarajevo and the Faculty of Electrical Engineering for providing us with the opportunity to work on this project and for equipping us with the knowledge and skills needed to create a functional and user-friendly web application.
 
