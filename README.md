@@ -10,7 +10,7 @@ Smart Café is a web application that allows customers to order drinks in a cafe
 
 ## Actors
 
-- Customer: The person who is ordering the drinks using the Smart Caf� web application.
+- Customer: The person who is ordering the drinks using the Smart Café web application.
 - Waiter: The person who receives the drink orders at the bar, accepts or cancels them, and serves the drinks to the customers.
 - Administrator: The person who can view statistics for the cafe in general and the menu of drinks that the cafe provides
 
@@ -26,7 +26,7 @@ Smart Café is a web application that allows customers to order drinks in a cafe
 
 We are proud to collaborate with our client, Lagoon Cocktail Bar, who helped us in testing and refining the application. Their valuable input and feedback played a crucial role in the development of Smart Caf�, and we are grateful for their support.
 
-The Smart Caf� team is also grateful to the University of Sarajevo and the Faculty of Electrical Engineering for providing us with the opportunity to work on this project and for equipping us with the knowledge and skills needed to create a functional and user-friendly web application.
+The Smart Café team is also grateful to the University of Sarajevo and the Faculty of Electrical Engineering for providing us with the opportunity to work on this project and for equipping us with the knowledge and skills needed to create a functional and user-friendly web application.
 
 Finally, we would like to acknowledge the power of open-source software and libraries, which we utilized throughout the project. Without these resources, Smart Cafe would not have been possible.
 
@@ -38,7 +38,7 @@ Finally, we would like to acknowledge the power of open-source software and libr
 
 ## Conclusion
 
-The Smart Caf� is a convenient and easy-to-use application that makes ordering drinks in a cafe a breeze. The application is designed with the customer in mind, allowing for quick and easy modifications and cancellations of orders. We are excited to bring this innovative technology to cafes around the world.
+The Smart Café is a convenient and easy-to-use application that makes ordering drinks in a cafe a breeze. The application is designed with the customer in mind, allowing for quick and easy modifications and cancellations of orders. We are excited to bring this innovative technology to cafes around the world.
 
 ## Team Members
 
