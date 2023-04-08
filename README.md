@@ -5,7 +5,7 @@
 Smart Café is a web application that allows customers to order drinks in a cafe through their phone. The orders are sent to the waiter who can accept or cancel them. The application uses QR code technology to identify the table and allow customers to place their orders.
 
 <div>
-<img src="https://user-images.githubusercontent.com/113919501/226107833-fd2b22a4-aa8b-4ff0-b641-0c6bbb19a29b.png" align="right" width="400" alt="Smart Café">
+<img src="https://user-images.githubusercontent.com/113919501/230730087-c304e52d-163e-4aed-8a10-953f5cdc4af0.png" align="right" width="400" alt="Smart Café">
 </div>
 
 ## Actors
