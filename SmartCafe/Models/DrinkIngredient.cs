@@ -9,10 +9,8 @@ namespace SmartCafe.Models
         public int id { get; set; }
         [ForeignKey("Drink")]
         public int idDrink { get; set; }
-        public Drink drink { get; set; }
         [ForeignKey("Ingredient")]
         public int idIngredient { get; set; }
-        public Ingredient ingredient { get; set; }
 
         public DrinkIngredient() { }
     }

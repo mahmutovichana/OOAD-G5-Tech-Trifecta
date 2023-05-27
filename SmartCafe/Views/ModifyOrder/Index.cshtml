@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SmartCafe.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.done)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tableNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idBartender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idGuest)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.done)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tableNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idBartender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idGuest)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

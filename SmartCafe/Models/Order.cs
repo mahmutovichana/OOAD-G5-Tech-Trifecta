@@ -13,10 +13,8 @@ namespace SmartCafe.Models
         public DateTime orderTime { get; set; }
         [ForeignKey("Bartender")]
         public int idBartender { get; set; }
-        public Bartender bartender { get; set; }
         [ForeignKey("Guest")]
         public int idGuest { get; set; }
-        public Guest guest { get; set; }
 
         public Order() { }
     }

@@ -1,0 +1,53 @@
+﻿@model SmartCafe.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="done" /> @Html.DisplayNameFor(model => model.done)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="tableNumber" class="control-label"></label>
+                <input asp-for="tableNumber" class="form-control" />
+                <span asp-validation-for="tableNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="orderTime" class="control-label"></label>
+                <input asp-for="orderTime" class="form-control" />
+                <span asp-validation-for="orderTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idBartender" class="control-label"></label>
+                <input asp-for="idBartender" class="form-control" />
+                <span asp-validation-for="idBartender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idGuest" class="control-label"></label>
+                <input asp-for="idGuest" class="form-control" />
+                <span asp-validation-for="idGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

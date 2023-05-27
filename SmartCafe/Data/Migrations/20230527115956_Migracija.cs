@@ -110,7 +110,7 @@ namespace SmartCafe.Data.Migrations
                     tableNumber = table.Column<int>(type: "int", nullable: false),
                     orderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     idBartender = table.Column<int>(type: "int", nullable: false),
-                    idGuest = table.Column<int>(type: "int", nullable: false),
+                    idGuest = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
