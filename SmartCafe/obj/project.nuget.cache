@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bQAT3Su4geo4j3BD5osYquD2R8C9NwCh9hnuzSIFIAJ8V3zwvXcyerAuV4g8RK/dcL9DDnkBWfxoHRUeV11x2Q==",
+  "dgSpecHash": "vqPjg45Hi9ayNWEb/TyTBB4FYWrm3pSascBCND7+ziFGhxAu4WPFlAFVaU0HFXpjPySztQFj1wRqBl0GqGpO5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\ooadView\\SmartCafe\\SmartCafe.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",

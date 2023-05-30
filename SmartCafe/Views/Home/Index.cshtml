@@ -1,7 +1,347 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-   <h1>Testing in progress</h1>>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lagoon's Cocktail Bar</title>
+    <style>
+        body {
+            font-family: Montserrat sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/abstractBackground1.png');
+            color: white;
+        }
+
+        .header {
+            background-color: transparent;
+            color: #fff;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: #fff;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
+
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
+
+        .logo img {
+            max-width: 35%;
+            margin-right: 0px;
+            margin-left: 15px;
+            margin-top: -20px;
+        }
+
+        .headline {
+            margin: 7%;
+            margin-top: 0;
+        }
+
+        .dropbtn {
+            background-color: #ac1a5a;
+            color: white;
+            padding: 16px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            margin-right: 50px;
+            font-family: Montserrat;
+            text-transform: uppercase;
+        }
+
+        .dropdown {
+            position: relative;
+            border-radius: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                border-radius: 20px;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                    border-radius: 20px;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: inline-block;
+        }
+
+        .dropbtn:hover{
+            background-color: #9c1650;
+        }
+
+        .ok-button {
+            font-family: Montserrat;
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: flex;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+            .ok-button:hover {
+                opacity: 1;
+            }
+
+        .bartenderSippin-img {
+            max-height: 50%;
+            max-width: 50%;
+            float: right;
+            margin-left: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            radius: 2px;
+        }
+
+        .partners {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+            .partners img {
+                max-width: 80px;
+                margin: 10px;
+            }
+
+        .our-story {
+            display: flex;
+            align-items: center;
+            margin-top: 0px;
+        }
+
+        .our-story-img {
+            max-height: 20%;
+            max-width: 20%;
+            flex: 1;
+            float: left;
+        }
+
+        .our-story-text {
+            flex: 1;
+            float: right;
+            padding: 0 10px;
+        }
+
+            .our-story-text h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .our-story-text p {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+        footer {
+            background-color: #333;
+            padding: 10px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .footer-column {
+            flex: 1;
+        }
+
+        .footer-logo {
+            max-width: 40%;
+        }
+
+        .footer-contact, .footer-social {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            color: white;
+        }
+
+            .footer-contact li, .footer-social li {
+                margin-bottom: 10px;
+                color: white;
+            }
+
+                .footer-contact li i, .footer-social li a {
+                    margin-right: 5px;
+                    color: white;
+                }
+
+        .footer-bottom {
+            margin-top: 10px;
+        }
+
+        .footer-social i {
+            color: white;
+        }
+    </style>   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+        </div>
+
+        <ul class="nav">
+            <li><a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>
+            <li><a asp-area="" asp-controller="StaffLogin" asp-action="Index">Staff Login</a></li>
+        </ul>
+    </div>
+
+    <div class="headline">
+        <img class="bartenderSippin-img" src="~/images/bartenderSippin.jpg" alt="Cocktail Bar Image">
+
+        <h1>No stress, just sip and impress, with the Lagoon's online access.</h1>
+
+        <p>Get ready for a new and exciting way to order, by simply selecting your table number from the options below.</p>
+
+        <div class="dropdown">
+            <button class="dropbtn" id="dropdown-button">Select your table number</button>
+            <div class="dropdown-content">
+                <a data-table="1" onclick="changeButtonText('1')">1</a>
+                <a data-table="2" onclick="changeButtonText('2')">2</a>
+                <a data-table="3" onclick="changeButtonText('3')">3</a>
+            </div>
+        </div>
+
+        <button class="ok-button" id="ok-button" type="button">OK</button>
+        
+        <script>
+            function changeButtonText(text) {
+                document.getElementById("dropdown-button").textContent = text;
+            }
+        </script>
+
+        <script>
+            document.getElementById('ok-button').addEventListener('click', function () {
+                window.location.href = '/MenuPage/Create';
+            });
+        </script>
+
+        <p>From there, you'll be taken to our menu page where you can start exploring our delicious offerings.</p>
+    </div>
+
+    <div class="partners">
+        <h2>PARTNERS</h2>
+        <img src="~/images/linkedinLogo.png" alt="Partner 1">
+        <img src="~/images/facebookLogo.png" alt="Partner 2">
+        <img src="~/images/amazonLogo.png" alt="Partner 3">
+        <img src="~/images/googleLogo.png" alt="Partner 4">
+        <img src="~/images/philipsLogo.png" alt="Partner 5">
+    </div>
+
+    <div class="our-story">
+        <div class="our-story-img">
+            <img src="~/images/celebratingWithDrinks.jpg" alt="Our Story Image">
+        </div>
+        <div class="our-story-text">
+            <h2>Our Story</h2>
+            <p>At Lagoon Cocktail Bar, we believe that the art of mixology is more than just creating delicious drinks - it's about crafting unique experiences that leave a lasting impression. Our team of passionate bartenders is dedicated to perfecting every detail, from the quality of the ingredients to the presentation of the final product.</p>
+        </div>
+    </div>
+
+             
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <img class="footer-logo" src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+            </div>
+            <div class="footer-column">
+                <ul class="footer-contact">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Lagoon Street, City</li>
+                    <li><i class="fas fa-phone"></i> +1234567890</li>
+                    <li><a href="mailto:info@lagooncocktailbar.com"><i class="fas fa-envelope"></i> info@lagooncocktailbar.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <ul class="footer-social">
+                    <li><a href="https://www.facebook.com/AtlantisBahamas/"><i class="fab fa-facebook bg-white"></i></a></li>
+                    <li><a href="https://www.twitter.com/atlantisbahamas/"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/atlantisbahamas/"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Lagoon's Cocktail Bar. All rights reserved.</p>
+        </div>
+    </footer>
+       
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var dropdownButton = document.getElementById('dropdown-button');
+            var dropdownContent = document.querySelector('.dropdown-content');
+
+            dropdownContent.addEventListener('click', function (event) {
+                var tableNumber = event.target.getAttribute('data-table');
+                dropdownButton.textContent = tableNumber;
+            });
+
+            var okButton = document.getElementById('ok-button');
+            okButton.addEventListener('click', function () {
+                var selectedTableNumber = dropdownButton.textContent;
+                // Make a request to the HomeController with the selectedTableNumber
+                window.location.href = '@Url.Action("Create", "MenuPage")?tableNumber=' + selectedTableNumber;
+            });
+        });
+    </script>
+
+
+</body>
+</html>

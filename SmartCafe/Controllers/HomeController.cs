@@ -33,5 +33,12 @@ namespace SmartCafe.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult SelectTable(string tableNumber)
+        {
+            ViewData["SelectedTableNumber"] = tableNumber;
+            return View();
+        }
+
     }
 }
