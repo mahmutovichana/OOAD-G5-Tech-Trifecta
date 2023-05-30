@@ -18,7 +18,7 @@
 
         .header {
             background-color: transparent;
-            color: black;
+            color: white;
             padding: 0px 10px;
             display: flex;
             justify-content: space-between;
@@ -39,7 +39,7 @@
         }
 
         .nav a {
-            color: #fff;
+            color: white;
             text-decoration: none;
             padding-bottom: 3px;
             border-bottom: 2px solid transparent;
@@ -126,7 +126,7 @@
     <div class="login-container">
         <div class="login-form">
             <h2>Staff Login</h2>
-            <form action="/login" method="post">
+            <form asp-controller ="StaffLogin" asp-action="Login" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
@@ -136,7 +136,7 @@
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Log in">
+                    <input style="font-family: Montserrat" type="submit" value="Log in">
                 </div>
             </form>
         </div>

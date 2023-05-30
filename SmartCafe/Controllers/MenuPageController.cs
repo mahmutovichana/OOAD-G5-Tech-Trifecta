@@ -25,6 +25,15 @@ namespace SmartCafe.Controllers
             return View(await _context.Drinks.ToListAsync());
         }
 
+        public async Task<IActionResult> DrinksIndex()
+        {
+            var options = new DbContextOptions<ApplicationDbContext>(); 
+            var drinks = GetDrinksFromDatabase(options);
+            return View(await drinks.ToListAsync());
+        }
+
+
+
         // GET: MenuPage/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -149,5 +158,14 @@ namespace SmartCafe.Controllers
         {
             return _context.Drinks.Any(e => e.id == id);
         }
+        private IQueryable<Drink> GetDrinksFromDatabase(DbContextOptions<ApplicationDbContext> options)
+        {
+            using (var context = new ApplicationDbContext(options))
+            {
+                return context.Drinks;
+            }
+        }
+
+
     }
 }

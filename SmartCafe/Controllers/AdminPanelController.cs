@@ -22,7 +22,7 @@ namespace SmartCafe.Controllers
         // GET: AdminPanel
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Owners.ToListAsync());
+            return View(await _context.Drinks.ToListAsync());
         }
 
         // GET: AdminPanel/Details/5
