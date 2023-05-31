@@ -265,23 +265,17 @@ namespace SmartCafe.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("drinkid")
-                        .HasColumnType("int");
-
                     b.Property<int>("idDrink")
                         .HasColumnType("int");
 
                     b.Property<int>("idIngredient")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ingredientid")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
 
-                    b.HasIndex("drinkid");
+                    b.HasIndex("idDrink");
 
-                    b.HasIndex("ingredientid");
+                    b.HasIndex("idIngredient");
 
                     b.ToTable("DrinkIngredient");
                 });
@@ -326,17 +320,8 @@ namespace SmartCafe.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("bartenderid")
-                        .HasColumnType("int");
-
                     b.Property<bool>("done")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("guestid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idBartender")
-                        .HasColumnType("int");
 
                     b.Property<int>("idGuest")
                         .HasColumnType("int");
@@ -349,9 +334,7 @@ namespace SmartCafe.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("bartenderid");
-
-                    b.HasIndex("guestid");
+                    b.HasIndex("idGuest");
 
                     b.ToTable("Order");
                 });
@@ -363,16 +346,10 @@ namespace SmartCafe.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("drinkid")
-                        .HasColumnType("int");
-
                     b.Property<int>("idDrink")
                         .HasColumnType("int");
 
                     b.Property<int>("idOrder")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("orderid")
                         .HasColumnType("int");
 
                     b.Property<double>("price")
@@ -380,9 +357,9 @@ namespace SmartCafe.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("drinkid");
+                    b.HasIndex("idDrink");
 
-                    b.HasIndex("orderid");
+                    b.HasIndex("idOrder");
 
                     b.ToTable("OrderItem");
                 });
@@ -421,9 +398,6 @@ namespace SmartCafe.Data.Migrations
                     b.Property<int>("idDrink")
                         .HasColumnType("int");
 
-                    b.Property<int?>("mostSoldDrinkid")
-                        .HasColumnType("int");
-
                     b.Property<int>("noOfEmployees")
                         .HasColumnType("int");
 
@@ -432,7 +406,7 @@ namespace SmartCafe.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("mostSoldDrinkid");
+                    b.HasIndex("idDrink");
 
                     b.ToTable("Statistic");
                 });
@@ -490,56 +464,62 @@ namespace SmartCafe.Data.Migrations
 
             modelBuilder.Entity("SmartCafe.Models.DrinkIngredient", b =>
                 {
-                    b.HasOne("SmartCafe.Models.Drink", "drink")
+                    b.HasOne("SmartCafe.Models.Drink", "Drink")
                         .WithMany()
-                        .HasForeignKey("drinkid");
+                        .HasForeignKey("idDrink")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SmartCafe.Models.Ingredient", "ingredient")
+                    b.HasOne("SmartCafe.Models.Ingredient", "Ingredient")
                         .WithMany()
-                        .HasForeignKey("ingredientid");
+                        .HasForeignKey("idIngredient")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("drink");
+                    b.Navigation("Drink");
 
-                    b.Navigation("ingredient");
+                    b.Navigation("Ingredient");
                 });
 
             modelBuilder.Entity("SmartCafe.Models.Order", b =>
                 {
-                    b.HasOne("SmartCafe.Models.Bartender", "bartender")
+                    b.HasOne("SmartCafe.Models.Guest", "Guest")
                         .WithMany()
-                        .HasForeignKey("bartenderid");
+                        .HasForeignKey("idGuest")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SmartCafe.Models.Guest", "guest")
-                        .WithMany()
-                        .HasForeignKey("guestid");
-
-                    b.Navigation("bartender");
-
-                    b.Navigation("guest");
+                    b.Navigation("Guest");
                 });
 
             modelBuilder.Entity("SmartCafe.Models.OrderItem", b =>
                 {
-                    b.HasOne("SmartCafe.Models.Drink", "drink")
+                    b.HasOne("SmartCafe.Models.Drink", "Drink")
                         .WithMany()
-                        .HasForeignKey("drinkid");
+                        .HasForeignKey("idDrink")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SmartCafe.Models.Order", "order")
+                    b.HasOne("SmartCafe.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("orderid");
+                        .HasForeignKey("idOrder")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("drink");
+                    b.Navigation("Drink");
 
-                    b.Navigation("order");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("SmartCafe.Models.Statistic", b =>
                 {
-                    b.HasOne("SmartCafe.Models.Drink", "mostSoldDrink")
+                    b.HasOne("SmartCafe.Models.Drink", "Drink")
                         .WithMany()
-                        .HasForeignKey("mostSoldDrinkid");
+                        .HasForeignKey("idDrink")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("mostSoldDrink");
+                    b.Navigation("Drink");
                 });
 #pragma warning restore 612, 618
         }

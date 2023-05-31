@@ -97,7 +97,7 @@ namespace SmartCafe.Data.Migrations
                         column: x => x.idDrink,
                         principalTable: "Drink",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,24 +109,17 @@ namespace SmartCafe.Data.Migrations
                     done = table.Column<bool>(type: "bit", nullable: false),
                     tableNumber = table.Column<int>(type: "int", nullable: false),
                     orderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    idBartender = table.Column<int>(type: "int", nullable: false),
                     idGuest = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Order", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Order_Bartender_idBartender",
-                        column: x => x.idBartender,
-                        principalTable: "Bartender",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Order_Guest_idGuest",
                         column: x => x.idGuest,
                         principalTable: "Guest",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,13 +139,13 @@ namespace SmartCafe.Data.Migrations
                         column: x => x.idDrink,
                         principalTable: "Drink",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DrinkIngredient_Ingredient_idIngredient",
                         column: x => x.idIngredient,
                         principalTable: "Ingredient",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,13 +166,13 @@ namespace SmartCafe.Data.Migrations
                         column: x => x.idDrink,
                         principalTable: "Drink",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderItem_Order_idOrder",
                         column: x => x.idOrder,
                         principalTable: "Order",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -191,11 +184,6 @@ namespace SmartCafe.Data.Migrations
                 name: "IX_DrinkIngredient_idIngredient",
                 table: "DrinkIngredient",
                 column: "idIngredient");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_idBartender",
-                table: "Order",
-                column: "idBartender");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_idGuest",
@@ -221,6 +209,9 @@ namespace SmartCafe.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Bartender");
+
+            migrationBuilder.DropTable(
                 name: "DrinkIngredient");
 
             migrationBuilder.DropTable(
@@ -240,9 +231,6 @@ namespace SmartCafe.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Drink");
-
-            migrationBuilder.DropTable(
-                name: "Bartender");
 
             migrationBuilder.DropTable(
                 name: "Guest");

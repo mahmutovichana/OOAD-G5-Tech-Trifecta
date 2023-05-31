@@ -11,10 +11,11 @@ namespace SmartCafe.Models
         public bool done { get; set; }
         public int tableNumber { get; set; }
         public DateTime orderTime { get; set; }
-        [ForeignKey("Bartender")]
-        public int idBartender { get; set; }
+
+
         [ForeignKey("Guest")]
         public int idGuest { get; set; }
+        public Guest Guest { get; set; }
 
         public Order() { }
     }
