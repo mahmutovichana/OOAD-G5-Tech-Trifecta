@@ -2,40 +2,229 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<style>
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .drink-item {
+        width: calc(25% - 10px); /* Postavite širinu na četvrtinu reda minus 10 piksela za razmak */
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+        .drink-item h3 {
+            margin-top: 0;
+        }
+
+        .drink-item img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lagoon's Cocktail Bar - Admin Panel</title>
+    <style>
+        /* Stilovi za header */
+        body {
+            font-family: Montserrat sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/abstractBackground2.png');
+            color: black;
+        }
+
+        .header {
+            background-color: transparent;
+            color: white;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: white;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
+
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
+
+        .logo img {
+            max-width: 35%;
+            margin-right: 0px;
+            margin-left: 15px;
+            margin-top: -20px;
+        }
+
+        /* Stilovi za statistiku */
+        .statistics {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin: 30px;
+        }
+
+        .statistics-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Polutransparentna pozadina */
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .statistics-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .statistics-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Stilovi za Most Sold Cocktail */
+        .most-sold-cocktail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Polu transparentna pozadina */
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+            .most-sold-cocktail img {
+                max-width: 100%;
+                height: 70%;
+                margin-bottom: 10px;
+            }
+
+        .most-sold-cocktail-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Stilovi za carousel */
+        .carousel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px; /* Povećan razmak između boxova */
+            margin: 20px;
+        }
+
+        .carousel-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            text-decoration: none; /* Uklonjen underline */
+            color: black; /* Postavljena boja teksta na crnu */
+        }
+
+            .carousel-item:hover {
+                background-color: #e0e0e0;
+            }
+
+        .carousel-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+        </div>
+
+        <ul class="nav">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>
+            <li><a class="active" asp-area="" asp-controller="StaffLogin" asp-action="Index">Staff Login</a></li>
+        </ul>
+    </div>
+
+    <div class="statistics">
+        <div class="statistics-item">
+            <span class="statistics-label">Today's Profit</span>
+            <span class="statistics-value">$230.4</span>
+        </div>
+        <div class="statistics-item">
+            <span class="statistics-label">Total Profit</span>
+            <span class="statistics-value">$3.4K</span>
+        </div>
+        <div class="statistics-item">
+            <span class="statistics-label">Number of workers</span>
+            <span class="statistics-value">6</span>
+        </div>
+        <div class="statistics-item">
+            <span class="statistics-label">Number of customers</span>
+            <span class="statistics-value">1 426 755</span>
+        </div>
+
+        <div class="most-sold-cocktail">
+            <span class="most-sold-cocktail-name">Kiwi Kiss</span>
+            <div>
+                <img src="@Url.Content("~/images/Kiwi Kiss.jpg")" alt="Most Sold Cocktail" class="most-sold-cocktail-image" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="carousel">
+        @foreach (var drink in Model)
+        {
+            <a href="@Url.Action("Edit", new { id = drink.id })" class="carousel-item">
+                <h3>@drink.name</h3>
+                <p>Price: @drink.price</p>
+                <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image" />
+            </a>
+        }
+    </div>
+</body>
+</html>
