@@ -560,11 +560,6 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Error.cshtml.g.cs
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
-C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Create.cshtml.g.cs
-C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Delete.cshtml.g.cs
-C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Details.cshtml.g.cs
-C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Edit.cshtml.g.cs
-C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Index.cshtml.g.cs
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\MenuPage\Create.cshtml.g.cs
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\MenuPage\Delete.cshtml.g.cs
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\MenuPage\Details.cshtml.g.cs
@@ -611,3 +606,8 @@ C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\n
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\StaffLogin\Index.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Create.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Delete.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Details.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Edit.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\AdminPanel\Index.cshtml.g.cs

@@ -1,4 +1,4 @@
-﻿@model SmartCafe.Models.Owner
+﻿@model SmartCafe.Models.Drink
 
 @{
     ViewData["Title"] = "Create";
@@ -6,26 +6,21 @@
 
 <h1>Create</h1>
 
-<h4>Owner</h4>
+<h4>Drink</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="username" class="control-label"></label>
-                <input asp-for="username" class="form-control" />
-                <span asp-validation-for="username" class="text-danger"></span>
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="password" class="control-label"></label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="role" class="control-label"></label>
-                <input asp-for="role" class="form-control" />
-                <span asp-validation-for="role" class="text-danger"></span>
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

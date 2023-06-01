@@ -4,66 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<style>
-    .menu {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .drink-item {
-        width: calc(25% - 10px); /* Postavite širinu na četvrtinu reda minus 10 piksela za razmak */
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-        .drink-item h3 {
-            margin-top: 0;
-        }
-
-        .drink-item img {
-            max-width: 80%; /* Postavite maksimalnu širinu slike na 100% */
-            height: 70%; /* Održava omjer visine i širine slike */
-        }
-</style>
-
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<!--<table class="table">
+<table class="table">
     <thead>
         <tr>
             <th>
-                @@Html.DisplayNameFor(model => model.username)
+                @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @@Html.DisplayNameFor(model => model.password)
-            </th>
-            <th>
-                @@Html.DisplayNameFor(model => model.role)
+                @Html.DisplayNameFor(model => model.price)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>-->
-
-
-        <div class="menu">
-            @foreach (var drink in Model)
-            {
-                <div class="drink-item">
-                    <h3>@drink.name</h3>
-                    <p>Price: @drink.price</p>
-                    <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" /> <!-- Prikaz slike pica -->
-                </div>
-            }
-        </div>
-
-<table class="table">
-    <thead>
-
+    <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -71,9 +29,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

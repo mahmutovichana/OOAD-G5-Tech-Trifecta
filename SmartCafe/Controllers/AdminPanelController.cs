@@ -35,14 +35,14 @@ namespace SmartCafe.Controllers
                 return NotFound();
             }
 
-            var owner = await _context.Owners
+            var drink = await _context.Drinks
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (owner == null)
+            if (drink == null)
             {
                 return NotFound();
             }
 
-            return View(owner);
+            return View(drink);
         }
 
         // GET: AdminPanel/Create
@@ -56,15 +56,15 @@ namespace SmartCafe.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,username,password,role")] Owner owner)
+        public async Task<IActionResult> Create([Bind("id,name,price")] Drink drink)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(owner);
+                _context.Add(drink);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(owner);
+            return View(drink);
         }
 
         // GET: AdminPanel/Edit/5
@@ -75,12 +75,12 @@ namespace SmartCafe.Controllers
                 return NotFound();
             }
 
-            var owner = await _context.Owners.FindAsync(id);
-            if (owner == null)
+            var drink = await _context.Drinks.FindAsync(id);
+            if (drink == null)
             {
                 return NotFound();
             }
-            return View(owner);
+            return View(drink);
         }
 
         // POST: AdminPanel/Edit/5
@@ -88,9 +88,9 @@ namespace SmartCafe.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,username,password,role")] Owner owner)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,price")] Drink drink)
         {
-            if (id != owner.id)
+            if (id != drink.id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace SmartCafe.Controllers
             {
                 try
                 {
-                    _context.Update(owner);
+                    _context.Update(drink);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OwnerExists(owner.id))
+                    if (!DrinkExists(drink.id))
                     {
                         return NotFound();
                     }
@@ -115,7 +115,7 @@ namespace SmartCafe.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(owner);
+            return View(drink);
         }
 
         // GET: AdminPanel/Delete/5
@@ -126,14 +126,14 @@ namespace SmartCafe.Controllers
                 return NotFound();
             }
 
-            var owner = await _context.Owners
+            var drink = await _context.Drinks
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (owner == null)
+            if (drink == null)
             {
                 return NotFound();
             }
 
-            return View(owner);
+            return View(drink);
         }
 
         // POST: AdminPanel/Delete/5
@@ -141,15 +141,15 @@ namespace SmartCafe.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var owner = await _context.Owners.FindAsync(id);
-            _context.Owners.Remove(owner);
+            var drink = await _context.Drinks.FindAsync(id);
+            _context.Drinks.Remove(drink);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OwnerExists(int id)
+        private bool DrinkExists(int id)
         {
-            return _context.Owners.Any(e => e.id == id);
+            return _context.Drinks.Any(e => e.id == id);
         }
     }
 }
