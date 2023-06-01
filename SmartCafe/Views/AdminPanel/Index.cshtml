@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<SmartCafe.Models.Drink>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -180,12 +183,15 @@
         <div class="logo">
             <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
         </div>
-
-        <ul class="nav">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>
-            <li><a class="active" asp-area="" asp-controller="StaffLogin" asp-action="Index">Staff Login</a></li>
+        <ul class="navbar-nav">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    </form>
+                </li>
+            }
         </ul>
     </div>
 
