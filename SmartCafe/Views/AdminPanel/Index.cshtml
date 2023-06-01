@@ -9,173 +9,230 @@
 }
 
 <style>
-    .menu {
+    /* Stilovi za header */
+    body {
+        font-family: Montserrat sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('/images/abstractBackground2.png');
+        color: black;
+    }
+
+    .header {
+        background-color: transparent;
+        color: white;
+        padding: 0px 10px;
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
+        align-items: center;
     }
 
-    .drink-item {
-        width: calc(25% - 10px); /* Postavite širinu na četvrtinu reda minus 10 piksela za razmak */
-        margin-bottom: 20px;
-        text-align: center;
+    .nav {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
     }
 
-        .drink-item h3 {
-            margin-top: 0;
+        .nav li {
+            margin-right: 35px;
+            margin-top: -50px;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
-        .drink-item img {
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding-bottom: 3px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.3s;
+        }
+
+            .nav a:hover {
+                border-bottom-color: #fff;
+            }
+
+    .logo img {
+        max-width: 35%;
+        margin-right: 0px;
+        margin-left: 15px;
+        margin-top: -20px;
+    }
+
+    /* Stilovi za statistiku */
+    .statistics {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin: 30px;
+    }
+
+    .statistics-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5); /* Polutransparentna pozadina */
+        padding: 20px;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .statistics-label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .statistics-value {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Stilovi za Most Sold Cocktail */
+    .most-sold-cocktail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5); /* Polu transparentna pozadina */
+        padding: 20px;
+        border-radius: 5px;
+        color: white;
+    }
+
+        .most-sold-cocktail img {
             max-width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 70%;
             margin-bottom: 10px;
         }
 
+    .most-sold-cocktail-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Stilovi za carousel */
+    .carousel {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px; /* Povećan razmak između boxova */
+        margin: 20px;
+    }
+
+    .carousel-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        text-decoration: none; /* Uklonjen underline */
+        color: black; /* Postavljena boja teksta na crnu */
+    }
+
+        .carousel-item:hover {
+            background-color: #e0e0e0;
+        }
+
+    .carousel-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    /* Stilovi za modalni prozor */
+    .modal {
+        display: none; /* Inicijalno sakriven */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4); /* Polu transparentna pozadina */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .close {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal h1 {
+        margin-top: 0;
+    }
+
+    .modal form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .form-group input[type="submit"]:hover {
+                background-color: #45a049;
+            }
 </style>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Lagoon's Cocktail Bar - Admin Panel</title>
-    <style>
-        /* Stilovi za header */
-        body {
-            font-family: Montserrat sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('/images/abstractBackground2.png');
-            color: black;
-        }
-
-        .header {
-            background-color: transparent;
-            color: white;
-            padding: 0px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav {
-            list-style-type: none;
-            display: flex;
-            align-items: center;
-        }
-
-            .nav li {
-                margin-right: 35px;
-                margin-top: -50px;
-                text-transform: uppercase;
-                font-size: 14px;
-            }
-
-            .nav a {
-                color: white;
-                text-decoration: none;
-                padding-bottom: 3px;
-                border-bottom: 2px solid transparent;
-                transition: border-bottom-color 0.3s;
-            }
-
-                .nav a:hover {
-                    border-bottom-color: #fff;
-                }
-
-        .logo img {
-            max-width: 35%;
-            margin-right: 0px;
-            margin-left: 15px;
-            margin-top: -20px;
-        }
-
-        /* Stilovi za statistiku */
-        .statistics {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            margin: 30px;
-        }
-
-        .statistics-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5); /* Polutransparentna pozadina */
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .statistics-label {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .statistics-value {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        /* Stilovi za Most Sold Cocktail */
-        .most-sold-cocktail {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5); /* Polu transparentna pozadina */
-            padding: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-
-            .most-sold-cocktail img {
-                max-width: 100%;
-                height: 70%;
-                margin-bottom: 10px;
-            }
-
-        .most-sold-cocktail-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        /* Stilovi za carousel */
-        .carousel {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 20px; /* Povećan razmak između boxova */
-            margin: 20px;
-        }
-
-        .carousel-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            cursor: pointer;
-            text-decoration: none; /* Uklonjen underline */
-            color: black; /* Postavljena boja teksta na crnu */
-        }
-
-            .carousel-item:hover {
-                background-color: #e0e0e0;
-            }
-
-        .carousel-image {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -225,12 +282,63 @@
     <div class="carousel">
         @foreach (var drink in Model)
         {
-            <a href="@Url.Action("Edit", new { id = drink.id })" class="carousel-item">
+            <div class="carousel-item">
                 <h3>@drink.name</h3>
                 <p>Price: @drink.price</p>
                 <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image" />
-            </a>
+
+                <!-- Modalni prozor za uređivanje -->
+                <div id="modal-@drink.id" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h1>Edit Drink</h1>
+                        <form method="post" asp-action="Edit" asp-route-id="@drink.id">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" value="@drink.name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" id="price" name="price" value="@drink.price" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         }
     </div>
+
+    <script>
+        // JavaScript kod za modalni prozor
+        var modalItems = document.getElementsByClassName("carousel-item");
+        var modals = document.getElementsByClassName("modal");
+        var closeButtons = document.getElementsByClassName("close");
+
+        // Prikazuje modalni prozor za određenu stavku
+        function showModal(itemIndex) {
+            modals[itemIndex].style.display = "block";
+        }
+
+        // Sakriva modalni prozor za određenu stavku
+        function hideModal(itemIndex) {
+            modals[itemIndex].style.display = "none";
+        }
+
+        // Postavlja događaje za prikazivanje/skrivanje modalnih prozora
+        for (var i = 0; i < modalItems.length; i++) {
+            (function (index) {
+                modalItems[index].addEventListener("click", function () {
+                    showModal(index);
+                });
+
+                closeButtons[index].addEventListener("click", function () {
+                    hideModal(index);
+                });
+            })(i);
+        }
+    </script>
 </body>
 </html>
