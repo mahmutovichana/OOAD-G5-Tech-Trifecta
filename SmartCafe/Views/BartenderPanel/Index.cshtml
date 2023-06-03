@@ -1,0 +1,194 @@
+﻿@model IEnumerable<SmartCafe.Models.Order>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bartender Panel</title>
+    <style>
+        body {
+            font-family: Montserrat sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/abstractBackground2.png');
+            color: black;
+        }
+
+        .header {
+            background-color: transparent;
+            color: white;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: white;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
+
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
+
+        .logo img {
+            max-width: 35%;
+            margin-right: 0px;
+            margin-left: 15px;
+            margin-top: -20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .completed-checkbox {
+            cursor: pointer;
+        }
+
+        /* Stilovi za carousel */
+        .carousel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px; /* Povećan razmak između boxova */
+            margin: 20px;
+        }
+
+        .carousel-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            text-decoration: none; /* Uklonjen underline */
+            color: black; /* Postavljena boja teksta na crnu */
+        }
+
+            .carousel-item:hover {
+                background-color: #e0e0e0;
+            }
+
+        .carousel-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+        </div>
+        <ul class="navbar-nav">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark" id="logout-button" style="text-transform: uppercase; font-size: 16px; color: black;">LOG OUT</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Table Number</th>
+                <th>Time Received</th>
+                <th>Price</th>
+                <th>Ordered Cocktails</th>
+                <th>Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.id</td>
+                        <td>@order.orderTime</td>
+                        <td>@order.tableNumber</td>
+                        <td><i class="far fa-square completed-checkbox" onclick="deleteOrder(@order.id)"></i></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+    <!-- kod za menu -->
+    <div class="carousel">
+        @if (ViewBag.Drinks != null)
+        {
+            var drinks = ViewBag.Drinks as IEnumerable<SmartCafe.Models.Drink>;
+            foreach (var drink in drinks)
+            {
+                <div class="carousel-item">
+                    <h3>@drink.name</h3>
+                    <p>Price: @drink.price</p>
+                    <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image" />
+                </div>
+            }
+        }
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        function deleteOrder(orderNumber) {
+            // Implementirati kod za brisanje narudžbe sa zadanim brojem
+            // Nakon brisanja, osvježite prikaz tabele kako bi se redak uklonio
+        }
+    </script>
+</body>
+</html>

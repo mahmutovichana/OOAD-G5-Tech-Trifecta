@@ -825,3 +825,4 @@ C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\SmartCafe.pdb
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\SmartCafe.genruntimeconfig.cache
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\ref\SmartCafe.dll
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Index.cshtml.g.cs

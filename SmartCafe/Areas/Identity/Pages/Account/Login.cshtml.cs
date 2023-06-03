@@ -91,7 +91,7 @@ namespace SmartCafe.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Konobar"))
                     {
-                        returnUrl = Url.Content("~/");
+                        returnUrl = Url.Content("~/BartenderPanel");
                     }
 
                     _logger.LogInformation("User logged in.");

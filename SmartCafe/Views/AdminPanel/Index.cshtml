@@ -227,6 +227,22 @@
             .form-group input[type="submit"]:hover {
                 background-color: #45a049;
             }
+
+    .logout-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+
 </style>
 
 <!DOCTYPE html>
@@ -245,12 +261,13 @@
             {
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        <button type="submit" class="nav-link btn btn-link text-dark" id="logout-button" style="text-transform: uppercase; font-size: 16px; color: black;">LOG OUT</button>
                     </form>
                 </li>
             }
         </ul>
     </div>
+
 
     <div class="statistics">
         <div class="statistics-item">

@@ -34,24 +34,24 @@
             align-items: center;
         }
 
-        .nav li {
-            margin-right: 35px;
-            margin-top: -50px;
-            text-transform: uppercase;
-            font-size: 14px;
-        }
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
 
-        .nav a {
-            color: white;
-            text-decoration: none;
-            padding-bottom: 3px;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom-color 0.3s;
-        }
+            .nav a {
+                color: white;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
 
-        .nav a:hover {
-            border-bottom-color: #fff;
-        }
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
 
         .logo img {
             max-width: 35%;
@@ -62,10 +62,11 @@
 
         .login-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+            justify-content: space-between;
             height: 100vh;
+            margin-left: 50px;
         }
 
         .login-form {
@@ -74,41 +75,103 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             width: 300px;
+            margin-left: 50px;
         }
+
+            .login-form h2,
+            .login-form p {
+                color: black;
+                text-align: left;
+            }
 
         .form-group {
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            .form-group label {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="password"] {
+                width: 100%;
+                padding: 8px;
+                font-size: 14px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            .form-group input[type="submit"] {
+                background-color: #ac1a5a;
+                color: white;
+                padding: 8px 16px;
+                font-size: 14px;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                text-transform: uppercase;
+                transition: background-color 0.3s;
+            }
+
+                .form-group input[type="submit"]:hover {
+                    background-color: #9c1650;
+                }
+
+        .text-danger {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .computer {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-right: 50px;
+            flex-grow: 1;
         }
 
-        .form-group input[type="submit"] {
-            background-color: #ac1a5a;
-            color: white;
-            padding: 8px 16px;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-transform: uppercase;
-        }
+            .computer img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: auto;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+            }
 
-        .form-group input[type="submit"]:hover {
-            background-color: #9c1650;
-        }
+
+            .computer #gif {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 90%;
+                height: auto;
+                transform: translate(-50%, -50%);
+                z-index: 2;
+                background-image: url('/images/cafeAtmosphere.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                opacity: 0.8;
+            }
+
+
+            .computer img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: auto;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                z-index: 1;
+            }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -118,37 +181,45 @@
             <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
         </div>
 
-            <ul class="nav">
+        <ul class="nav">
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>
-            <li><a class="active" asp-area="" asp-controller="StaffLogin" asp-action="Index">Staff Login</a></li>
+            <li><a class="active" asp-area="Identity" asp-page="/Account/Login">Staff Login</a></li>
         </ul>
     </div>
 
-    <h1>@ViewData["Title"]</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <section>
-                <form id="account" method="post">
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Input.Email"></label>
-                        <input asp-for="Input.Email" class="form-control" />
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Input.Password"></label>
-                        <input asp-for="Input.Password" class="form-control" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Log in</button>
-                    </div>
-                </form>
-            </section>
+    <div class="login-container">
+
+        <div class="computer">
+            <img src="https://www.bebold.ch/img/home/macbook-white.png" alt="MacBook Computer Apple">
+            <div id="gif" style="background-position-y: 50%;"></div>
+        </div>
+
+        <div class="login-form">
+            <h2>Serving Up Success: Lagoon Staff Login</h2>
+
+            <p>Welcome to the World of Liquid Alchemy. Let's whip up some potions that will put a spell on our customers. And for the boss: We'll keep the drinks coming and the profits flowing. You just sit back and enjoy the magic!</p>
+
+            <form id="account" method="post">
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" type="text" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" type="password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+                    {
+                        <span class="text-danger">@ViewData["ErrorMessage"]</span>
+                    }
+                </div>
+                <div class="form-group">
+                    <input style="font-family: Montserrat" type="submit" value="Log in">
+                </div>
+            </form>
         </div>
     </div>
 
