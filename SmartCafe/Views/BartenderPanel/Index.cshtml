@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SmartCafe.Models.Order>
 @using Microsoft.AspNetCore.Identity
+@using SmartCafe.Models
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -187,7 +188,10 @@
                             }
                         </td>
                         <td>
-                            <input type="checkbox" class="completed-checkbox" @(item.done ? "checked" : "") />
+                            <form asp-action="Delete">
+                                <input type="hidden" name="id" value="@item.id" />
+                                <input type="submit" value="Completed" class="btn btn-danger" /> 
+                            </form>
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.id" class="edit">Edit</a> |
@@ -195,6 +199,9 @@
                         </td>
                     </tr>
                 }
+
+
+
             }
         </tbody>
     </table>
