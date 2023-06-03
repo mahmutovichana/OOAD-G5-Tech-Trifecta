@@ -22,11 +22,12 @@ namespace SmartCafe.Controllers
         public IActionResult Index()
         {
             var drinks = _context.Drinks.ToList();
+            var orderItems = _context.OrderItems.ToList();
             ViewBag.Drinks = drinks;
-
-            return View();
+            ViewBag.OrderItems = orderItems;
+            var orders = _context.Orders.Include(o => o.Guest).ToList();
+            return View(orders);
         }
-
 
         // GET: BartenderPanelController/Details/5
         public ActionResult Details(int id)

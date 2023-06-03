@@ -61,22 +61,33 @@
             margin-top: -20px;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
+        .table-container {
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
         }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: black;
+            color: white;
+            margin: 30px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ffffff;
+            padding: 10px;
+            text-align: center;
         }
 
         th {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
+            background-color: black;
+            font-weight: bold;
         }
 
         .completed-checkbox {
@@ -115,6 +126,10 @@
             margin-bottom: 10px;
         }
 
+        .edit .delete {
+            color:white;
+            text-decoration: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -139,50 +154,52 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.done)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.tableNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.orderTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Guest)
-                </th>
-                <th></th>
+                <th>ORDER ID</th>
+                <th>TABLE NUMBER</th>
+                <th>TIME RECEIVED</th>
+                <th>PRICE</th>
+                <th>ORDERED COCKTAILS</th>
+                <th>COMPLETED</th>
+                <th>OPTIONS</th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null)
             {
+                var orderItems = ViewBag.OrderItems as IEnumerable<SmartCafe.Models.OrderItem>;
                 @foreach (var item in Model)
                 {
+                    var orderItemForOrder = orderItems.Where(oi => oi.idOrder == item.id);
                     <tr>
+                        <td>@Html.DisplayFor(modelItem => item.id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.tableNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.orderTime)</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.done)
+                            @{
+                                double totalPrice = orderItemForOrder.Sum(oi => oi.price);
+                            }
+                            @totalPrice
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.tableNumber)
+                            @foreach (var orderItem in orderItemForOrder)
+                            {
+                                <span>@orderItem.Drink.name</span>
+                            }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.orderTime)
+                            <input type="checkbox" class="completed-checkbox" @(item.done ? "checked" : "") />
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Guest.id)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@item.id" class="edit">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.id" class="delete">Delete</a>
                         </td>
                     </tr>
                 }
-
             }
         </tbody>
     </table>
+
+
 
     <!-- kod za menu -->
     <div class="carousel">
