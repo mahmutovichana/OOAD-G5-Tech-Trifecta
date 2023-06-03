@@ -63,8 +63,9 @@
     .statistics {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
-        margin: 30px;
+        margin-top: 0px;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 
     .statistics-item {
@@ -74,6 +75,8 @@
         text-align: center;
         background-color: rgba(0, 0, 0, 0.5); /* Polutransparentna pozadina */
         padding: 20px;
+        margin-left: 5%;
+        margin-right: 5%;
         border-radius: 5px;
         color: white;
     }
@@ -92,6 +95,8 @@
 
     /* Stilovi za Most Sold Cocktail */
     .most-sold-cocktail {
+        margin-left: 5%;
+        margin-right: 5%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -257,6 +262,7 @@
             <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
         </div>
         <ul class="navbar-nav">
+            <h1>Admin Panel</h1>
             @if (SignInManager.IsSignedIn(User))
             {
                 <li class="nav-item">
@@ -302,7 +308,7 @@
             <div class="carousel-item">
                 <h3>@drink.name</h3>
                 <p>Price: @drink.price</p>
-                <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image" />
+                <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image rounded" />
 
                 <!-- Modalni prozor za uređivanje -->
                 <div id="modal-@drink.id" class="modal">
@@ -357,5 +363,6 @@
             })(i);
         }
     </script>
+
 </body>
 </html>

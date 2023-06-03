@@ -136,33 +136,53 @@
         </ul>
     </div>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Order Number</th>
-                <th>Table Number</th>
-                <th>Time Received</th>
-                <th>Price</th>
-                <th>Ordered Cocktails</th>
-                <th>Completed</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.done)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tableNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.orderTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Guest)
+                </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null)
             {
-                foreach (var order in Model)
+                @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@order.id</td>
-                        <td>@order.orderTime</td>
-                        <td>@order.tableNumber</td>
-                        <td><i class="far fa-square completed-checkbox" onclick="deleteOrder(@order.id)"></i></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.done)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tableNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.orderTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.id)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </td>
                     </tr>
                 }
+
             }
         </tbody>
     </table>
-
 
     <!-- kod za menu -->
     <div class="carousel">
@@ -179,9 +199,6 @@
             }
         }
     </div>
-
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>

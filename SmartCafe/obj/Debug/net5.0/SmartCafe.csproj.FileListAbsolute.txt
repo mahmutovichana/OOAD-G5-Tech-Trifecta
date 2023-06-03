@@ -826,3 +826,12 @@ C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\SmartCafe.genruntimeconfig.cache
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\ref\SmartCafe.dll
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Index.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartyPanel\Create.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartyPanel\Delete.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartyPanel\Details.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartyPanel\Edit.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartyPanel\Index.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Create.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Delete.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Details.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Edit.cshtml.g.cs

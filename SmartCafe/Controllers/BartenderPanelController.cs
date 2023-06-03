@@ -1,15 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SmartCafe.Data;
+using System;
+using System.Linq;
 
 namespace SmartCafe.Controllers
 {
     public class BartenderPanelController : Controller
     {
-        // GET: BartenderPanelController
-        public ActionResult Index()
+
+        private readonly ApplicationDbContext _context;
+
+        public BartenderPanelController(ApplicationDbContext context)
         {
+            _context = context;
+        }
+
+
+        // GET: BartenderPanelController
+        public IActionResult Index()
+        {
+            var drinks = _context.Drinks.ToList();
+            ViewBag.Drinks = drinks;
+
             return View();
         }
+
 
         // GET: BartenderPanelController/Details/5
         public ActionResult Details(int id)
@@ -79,5 +96,6 @@ namespace SmartCafe.Controllers
                 return View();
             }
         }
+
     }
 }
