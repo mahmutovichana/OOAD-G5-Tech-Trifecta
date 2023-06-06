@@ -22,6 +22,8 @@ namespace SmartCafe.Controllers
         // GET: MenuPage
         public async Task<IActionResult> Index()
         {
+            var drinks = _context.Drinks.ToList();
+            ViewBag.Drinks = drinks;
             return View(await _context.Drinks.ToListAsync());
         }
 

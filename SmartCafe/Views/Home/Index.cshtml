@@ -271,7 +271,7 @@
 
         <script>
             document.getElementById('ok-button').addEventListener('click', function () {
-                window.location.href = '/MenuPage/Create';
+                window.location.href = '/MenuPage/Index';
             });
         </script>
 
@@ -353,7 +353,7 @@
             okButton.addEventListener('click', function () {
                 var selectedTableNumber = dropdownButton.textContent;
                 // Make a request to the HomeController with the selectedTableNumber
-                window.location.href = '@Url.Action("Create", "MenuPage")?tableNumber=' + selectedTableNumber;
+                window.location.href = '@Url.Action("Index", "MenuPage")?tableNumber=' + selectedTableNumber;
             });
         });
     </script>

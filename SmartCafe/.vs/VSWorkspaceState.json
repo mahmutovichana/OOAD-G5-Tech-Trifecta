@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Controllers",
     "\\Views",
+    "\\Views\\AdminPanel",
     "\\Views\\Home"
   ],
-  "SelectedNode": "\\Views\\Home\\Index.cshtml",
+  "SelectedNode": "\\Controllers\\BartenderPanelController.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,41 +1,264 @@
 ﻿@model IEnumerable<SmartCafe.Models.Drink>
+@using Microsoft.AspNetCore.Identity
+@using SmartCafe.Models
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Menu Page";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lagoon's Cocktail Bar</title>
+    <style>
+        body {
+            font-family: Montserrat sans-serif;
+            margin: 50;
+            padding: 0;
+            background-image: url('/images/abstractBackground1.png');
+            color: white;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        .header {
+            background-color: transparent;
+            color: #fff;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: #fff;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
+
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
+
+        .logo img {
+            max-width: 35%;
+            margin-right: 0px;
+            margin-left: 15px;
+            margin-top: -20px;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .carousel-item {
+            position: relative;
+            text-align: center;
+        }
+
+            .carousel-item img {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .carousel-item {
+            position: relative;
+            text-align: center;
+        }
+
+            .carousel-item .image-container {
+                position: relative;
+                display: inline-block;
+            }
+
+        .info-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .info-message {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-image:hover .info-icon + .info-message {
+            top: 50%;
+            opacity: 1;
+        }
+
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+            .quantity button {
+                width: 30px;
+                height: 30px;
+                background-color: #fff;
+                border: none;
+                color: #000;
+                font-size: 16px;
+                cursor: pointer;
+                outline: none;
+            }
+
+            .quantity input {
+                width: 40px;
+                height: 30px;
+                text-align: center;
+                font-size: 16px;
+                border: none;
+                outline: none;
+            }
+
+        .finish-order {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .finish-order button {
+                padding: 10px 20px;
+                background-color: #ff3366;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .finish-order button:hover {
+                    background-color: #e6004c;
+                }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+        </div>
+
+        <ul class="nav">
+            <li><a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            <li><a asp-area="Identity" asp-page="/Account/Login">Staff Login</a></li>
+        </ul>
+    </div>
+
+    <h1 style="text-align:center">The Menu</h1>
+
+    <!-- kod za menu -->
+    <div class="carousel">
+        @if (ViewBag.Drinks != null)
+        {
+            var drinks = ViewBag.Drinks as IEnumerable<SmartCafe.Models.Drink>;
+            foreach (var drink in drinks)
+            {
+                <div class="carousel-item">
+                    <div class="image-container">
+                        <i class="fas fa-info-circle info-icon"></i>
+                        <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="carousel-image" />
+                    </div>
+                    <div class="info-message">Default message about ingredients</div>
+                    <h3>@drink.name</h3>
+                    <p>Price: @drink.price</p>
+                    <div class="quantity">
+                        <button class="minus-btn">-</button>
+                        <input type="text" class="quantity-input" value="0" />
+                        <button class="plus-btn">+</button>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityElements = document.querySelectorAll('.quantity');
+
+            quantityElements.forEach(function (element) {
+                const minusBtn = element.querySelector('.minus-btn');
+                const plusBtn = element.querySelector('.plus-btn');
+                const quantityInput = element.querySelector('input.quantity-input');
+
+                minusBtn.addEventListener('click', function () {
+                    updateQuantity(-1);
+                });
+
+                plusBtn.addEventListener('click', function () {
+                    updateQuantity(1);
+                });
+
+                function updateQuantity(change) {
+                    let quantity = parseInt(quantityInput.value);
+                    quantity += change;
+
+                    if (quantity < 0) {
+                        quantity = 0;
+                    }
+
+                    quantityInput.value = quantity;
+                }
+            });
+        });
+    </script>
+
+    <!-- Finish Order button -->
+    <div class="finish-order">
+        <button onclick="location.href='@Url.Action("Index", "ModifyOrder")'" type="button">Finish Order</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>
+
