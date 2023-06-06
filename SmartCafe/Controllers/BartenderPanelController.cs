@@ -28,9 +28,9 @@ namespace SmartCafe.Controllers
         // GET: BartenderPanelController
         public IActionResult Index()
         {
-            var drinks = _context.Drinks.ToList();
+            var Drinks = _context.Drinks.ToList();
             var orderItems = _context.OrderItems.ToList();
-            ViewBag.Drinks = drinks;
+            ViewBag.Drinks = Drinks;
             ViewBag.OrderItems = orderItems;
             var orders = _context.Orders.Include(o => o.Guest).ToList();
             return View(orders);
