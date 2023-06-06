@@ -22,9 +22,22 @@ namespace SmartCafe.Controllers
         }
 
         // GET: AdminPanel
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Drinks.ToListAsync());
+            // Calculate the necessary values
+            double todayProfit = DailyProfit();
+            double totalProfit = TotalProfit();
+            string mostSoldCocktailName = MostSoldDrink();
+
+            // Pass the values to the ViewBag
+            ViewBag.TodayProfit = todayProfit;
+            ViewBag.TotalProfit = totalProfit;
+            ViewBag.MostSoldCocktailName = mostSoldCocktailName;
+
+            // Retrieve the list of drinks from the database
+            var drinks = _context.Drinks.ToList();
+
+            return View(drinks);
         }
 
         // GET: AdminPanel/Details/5
@@ -151,5 +164,51 @@ namespace SmartCafe.Controllers
         {
             return _context.Drinks.Any(e => e.id == id);
         }
+        public double DailyProfit()
+        {
+            DateTime today = DateTime.Today;
+
+            double dailyProfit = _context.Orders
+                .Where(o => o.orderTime.Date == today)
+                .Join(_context.OrderItems, o => o.id, oi => oi.idOrder, (order, orderItem) => new { Order = order, OrderItem = orderItem })
+                .Sum(oi => oi.OrderItem.price);
+
+          
+
+            return dailyProfit;
+        }
+
+        public double TotalProfit()
+        {
+            double totalProfit = _context.Orders
+                .Join(_context.OrderItems, o => o.id, oi => oi.idOrder, (order, orderItem) => new { Order = order, OrderItem = orderItem })
+                .Sum(oi => oi.OrderItem.price);
+
+
+            return totalProfit;
+        }
+
+        private string MostSoldDrink()
+        {
+            var drinkOrderItems = _context.Drinks
+                .Join(
+                    _context.OrderItems,
+                    d => d.id,
+                    o => o.idDrink,
+                    (d, o) => new { Drink = d, OrderItem = o }
+                )
+                .ToList(); // Retrieve the data from the database
+
+            var query = drinkOrderItems
+                .GroupBy(x => x.Drink)
+                .Select(g => new { Drink = g.Key, OrderItemCount = g.Count() })
+                .OrderByDescending(x => x.OrderItemCount)
+                .FirstOrDefault();
+
+            return query?.Drink.name;
+        }
+
+
+
     }
 }

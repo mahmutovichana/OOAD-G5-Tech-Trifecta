@@ -275,31 +275,32 @@
     </div>
 
 
-    <div class="statistics">
-        <div class="statistics-item">
-            <span class="statistics-label">Today's Profit</span>
-            <span class="statistics-value">$230.4</span>
-        </div>
-        <div class="statistics-item">
-            <span class="statistics-label">Total Profit</span>
-            <span class="statistics-value">$3.4K</span>
-        </div>
-        <div class="statistics-item">
-            <span class="statistics-label">Number of workers</span>
-            <span class="statistics-value">6</span>
-        </div>
-        <div class="statistics-item">
-            <span class="statistics-label">Number of customers</span>
-            <span class="statistics-value">1 426 755</span>
-        </div>
 
-        <div class="most-sold-cocktail">
-            <span class="most-sold-cocktail-name">Kiwi Kiss</span>
-            <div>
-                <img src="@Url.Content("~/images/Kiwi Kiss.jpg")" alt="Most Sold Cocktail" class="most-sold-cocktail-image" />
-            </div>
-        </div>
+<div class="statistics">
+    <div class="statistics-item">
+        <span class="statistics-label">Today's Profit</span>
+        <span class="statistics-value">@ViewBag.TodayProfit $</span>
     </div>
+    <div class="statistics-item">
+        <span class="statistics-label">Total Profit</span>
+        <span class="statistics-value">@ViewBag.TotalProfit $</span>
+    </div>
+    <div class="statistics-item">
+        <span class="statistics-label">Number of workers</span>
+        <span class="statistics-value">10</span>
+    </div>
+    <div class="statistics-item">
+        <span class="statistics-label">Number of customers</span>
+        <span class="statistics-value">@ViewBag.NumberOfCustomers</span>
+    </div>
+</div>
+
+<div class="most-sold-cocktail">
+    <span class="most-sold-cocktail-name">Most Sold Cocktail: @ViewBag.MostSoldCocktailName</span>
+    <div>
+        <img src="@Url.Content("~/images/Kiwi Kiss.jpg")" alt="Most Sold Cocktail" class="most-sold-cocktail-image" />
+    </div>
+</div>
 
 
     <div class="carousel">

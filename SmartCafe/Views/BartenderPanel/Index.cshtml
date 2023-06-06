@@ -168,7 +168,7 @@
             @if (Model != null)
             {
                 var orderItems = ViewBag.OrderItems as IEnumerable<SmartCafe.Models.OrderItem>;
-                @foreach (var item in Model)
+                @foreach (var item in Model.Where(order => !order.done))
                 {
                     var orderItemForOrder = orderItems.Where(oi => oi.idOrder == item.id);
                     <tr>
