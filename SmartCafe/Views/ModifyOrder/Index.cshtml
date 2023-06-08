@@ -1,0 +1,159 @@
+﻿@model IEnumerable<SmartCafe.Models.Order>
+@using Microsoft.AspNetCore.Identity
+@using SmartCafe.Models
+
+@{
+    ViewData["Title"] = "Modify Order";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lagoon's Cocktail Bar</title>
+    <style>
+        body {
+            font-family: Montserrat;
+            margin: 50;
+            padding: 0;
+            background-image: url('/images/abstractBackground1.png');
+            color: white;
+        }
+
+        .header {
+            background-color: transparent;
+            color: #fff;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+            .nav li {
+                margin-right: 35px;
+                margin-top: -50px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: #fff;
+                text-decoration: none;
+                padding-bottom: 3px;
+                border-bottom: 2px solid transparent;
+                transition: border-bottom-color 0.3s;
+            }
+
+                .nav a:hover {
+                    border-bottom-color: #fff;
+                }
+
+        .logo img {
+            max-width: 35%;
+            margin-right: 0px;
+            margin-left: 15px;
+            margin-top: -20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .order-details {
+            flex: 1;
+            background-color: #ffffff;
+            color: black;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .order-details h1 {
+                font-size: 24px;
+            }
+
+            .order-details p {
+                margin-top: 10px;
+            }
+
+            .order-details .thank-you {
+                font-weight: bold;
+            }
+
+            .order-details .modify-order {
+                margin-top: 20px;
+            }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+            .buttons h1 {
+                font-size: 18px;
+                text-align: right;
+            }
+
+            .buttons .btn {
+                padding: 10px 20px;
+                background-color: #ff3366;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                text-decoration: none;
+            }
+
+                .buttons .btn:hover {
+                    background-color: #e6004c;
+                }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
+        </div>
+
+        <ul class="nav">
+            <li><a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            <li><a asp-area="Identity" asp-page="/Account/Login">Staff Login</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="order-details">
+            <h1>Cijena ukupna</h1>
+            <p>List of items ordered:</p>
+            <!-- Display the list of ordered items here -->
+            @foreach (var order in Model)
+            {
+                <p>@order.tableNumber</p>
+            }
+            <p class="thank-you">Thank you for your order! Your order is being prepared and will be added shortly.</p>
+            <p>Need to make a change to your order? No problem! You can cancel or modify your order within the next 3 minutes. After that, it will be sent to the bar for preparation.</p>
+        </div>
+
+        <div class="buttons">
+            <h1>Order details</h1>
+            <button class="btn" onclick="location.href='@Url.Action("Index", "MenuPage")'" type="button">Modify</button>
+            <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'" type="button">Cancel</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>

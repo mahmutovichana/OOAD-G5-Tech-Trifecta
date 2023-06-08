@@ -840,3 +840,8 @@ C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\n
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Details.cshtml.g.cs
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Edit.cshtml.g.cs
 C:\Users\Korisnik\Desktop\Tajra\OOAD\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\BartenderPanel\Index.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Index.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Create.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Delete.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Details.cshtml.g.cs
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Edit.cshtml.g.cs
