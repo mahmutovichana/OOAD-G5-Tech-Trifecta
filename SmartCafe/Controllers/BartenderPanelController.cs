@@ -135,9 +135,9 @@ namespace SmartCafe.Controllers
             return View(order);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Completed")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Completed(int id)
         {
             var order = await _context.Orders.FindAsync(id);
             order.done = true; // Postavi atribut done na true
@@ -146,6 +146,16 @@ namespace SmartCafe.Controllers
         }
 
 
+        // POST: Orders/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.id == id);

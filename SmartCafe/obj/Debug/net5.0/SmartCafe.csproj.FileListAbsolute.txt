@@ -845,3 +845,8 @@ C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Delete.cshtml.g.cs
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Details.cshtml.g.cs
 C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Edit.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Create.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Delete.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Details.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Edit.cshtml.g.cs
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Debug\net5.0\Razor\Views\ModifyOrder\Index.cshtml.g.cs
