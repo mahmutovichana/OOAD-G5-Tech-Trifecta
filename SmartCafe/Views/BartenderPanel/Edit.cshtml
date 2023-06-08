@@ -5,54 +5,127 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
+    <style>
+     
+      body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F8F8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+    
+       
+
+            input[type="text"],
+            select {
+                font-size: 14px;
+            }
+
+            .btn-primary {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h4>Order</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label asp-for="tableNumber" class="control-label"></label>
+                        <input asp-for="tableNumber" class="form-control" />
+                        <span asp-validation-for="tableNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="orderTime" class="control-label"></label>
+                        <input asp-for="orderTime" class="form-control" />
+                        <span asp-validation-for="orderTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="idGuest" class="control-label"></label>
+                        <select asp-for="idGuest" class="form-control" asp-items="ViewBag.idGuest"></select>
+                        <span asp-validation-for="idGuest" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id" />
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="done" /> @Html.DisplayNameFor(model => model.done)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="tableNumber" class="control-label"></label>
-                <input asp-for="tableNumber" class="form-control" />
-                <span asp-validation-for="tableNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="orderTime" class="control-label"></label>
-                <input asp-for="orderTime" class="form-control" />
-                <span asp-validation-for="orderTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="idGuest" class="control-label"></label>
-                <select asp-for="idGuest" class="form-control" asp-items="ViewBag.idGuest"></select>
-                <span asp-validation-for="idGuest" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>
