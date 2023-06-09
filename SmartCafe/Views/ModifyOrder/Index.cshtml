@@ -137,23 +137,44 @@
     </div>
     <div class="container">
         <div class="order-details">
-            <h1>Cijena ukupna</h1>
-            <p>List of items ordered:</p>
+            
             <!-- Display the list of ordered items here -->
-            @foreach (var order in Model)
-            {
-                <p>@order.tableNumber</p>
-            }
+
+            <h2>Ordered Items</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Drink ID</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var drink in ViewBag.SelectedDrinks)
+                    {
+                        <tr>
+                            <td>@drink.Key</td>
+                            <td>@drink.Value</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
             <p class="thank-you">Thank you for your order! Your order is being prepared and will be added shortly.</p>
             <p>Need to make a change to your order? No problem! You can cancel or modify your order within the next 3 minutes. After that, it will be sent to the bar for preparation.</p>
         </div>
 
         <div class="buttons">
             <h1>Order details</h1>
-            <button class="btn" onclick="location.href='@Url.Action("Index", "MenuPage")'" type="button">Modify</button>
+            <button class="btn" id="modify-order-btn" type="button">Modify</button>
             <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'" type="button">Cancel</button>
         </div>
     </div>
+    <script>
+        const modifyOrderButton = document.getElementById('modify-order-btn');
+        modifyOrderButton.addEventListener('click', function () {
+            history.back();
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

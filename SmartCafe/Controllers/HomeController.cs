@@ -25,7 +25,7 @@ namespace SmartCafe.Controllers
         }
 
         public ActionResult ScanQRCode()
-        {
+        { 
             // Redirekcija na početnu stranicu
             return RedirectToAction("Index", "Home");
         }

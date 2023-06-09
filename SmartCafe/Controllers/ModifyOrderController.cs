@@ -20,9 +20,10 @@ namespace SmartCafe.Controllers
         }
 
         // GET: ModifyOrder
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks)
         {
             var applicationDbContext = _context.Orders.Include(o => o.Guest);
+            ViewBag.SelectedDrinks = selectedDrinks;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -155,6 +156,15 @@ namespace SmartCafe.Controllers
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.id == id);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Proba(Dictionary<int, int> selectedDrinks)
+        {
+            foreach(var nesto in selectedDrinks)
+            Console.WriteLine(nesto);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

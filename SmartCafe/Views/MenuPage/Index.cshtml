@@ -213,14 +213,19 @@
                     <h3>@drink.name</h3>
                     <p>Price: @drink.price</p>
                     <div class="quantity">
-                        <button class="minus-btn">-</button>
+                        <button class="minus-btn" data-drink-id="@drink.id">-</button>
                         <input type="text" class="quantity-input" value="0" />
-                        <button class="plus-btn">+</button>
+                        <button class="plus-btn" data-drink-id="@drink.id">+</button>
                     </div>
                 </div>
 
             }
         }
+    </div>
+
+    <!-- Finish Order button -->
+    <div class="finish-order">
+        <button id="finish-order-btn" type="button">Finish Order</button>
     </div>
 
     <script>
@@ -251,15 +256,41 @@
                     quantityInput.value = quantity;
                 }
             });
+
+            const finishOrderButton = document.getElementById('finish-order-btn');
+            finishOrderButton.addEventListener('click', function () {
+                const selectedDrinks = [];
+                const quantityInputs = document.querySelectorAll('.quantity-input');
+
+                quantityInputs.forEach(function (input) {
+                    const quantity = parseInt(input.value);
+                    const drinkId = input.parentElement.querySelector('.minus-btn').getAttribute('data-drink-id');
+
+                    if (quantity > 0) {
+                        selectedDrinks.push({ drinkId: drinkId, quantity: quantity });
+                    }
+                });
+
+                // Create a form and append selectedDrinks as hidden inputs
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/ModifyOrder';
+
+                selectedDrinks.forEach(function (drink) {
+                    const drinkIdInput = document.createElement('input');
+                    drinkIdInput.type = 'hidden';
+                    drinkIdInput.name = 'selectedDrinks[' + drink.drinkId + ']';
+                    drinkIdInput.value = drink.quantity;
+                    form.appendChild(drinkIdInput);
+                });
+
+                // Append the form to the document and submit it
+                document.body.appendChild(form);
+                form.submit();
+            });
         });
     </script>
-
-    <!-- Finish Order button -->
-    <div class="finish-order">
-        <button onclick="location.href='@Url.Action("Index", "ModifyOrder")'" type="button">Finish Order</button>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
-
