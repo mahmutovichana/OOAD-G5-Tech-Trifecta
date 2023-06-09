@@ -13,7 +13,7 @@ using SmartCafe.Models;
 namespace SmartCafe.Controllers
 {
     [Authorize (Roles = "Administrator")]
-    public class AdminPanelController : Controller, IStatistic
+    public class AdminPanelController : Controller, IStatistic, IPrototype
     {
         private readonly ApplicationDbContext _context;
 
@@ -188,17 +188,16 @@ namespace SmartCafe.Controllers
 
             return totalProfit;
         }
-
-        public string MostSoldDrink()
+        private Drink MostUsedDrink()
         {
             var drinkOrderItems = _context.Drinks
-                .Join(
-                    _context.OrderItems,
-                    d => d.id,
-                    o => o.idDrink,
-                    (d, o) => new { Drink = d, OrderItem = o }
-                )
-                .ToList(); // Retrieve the data from the database
+               .Join(
+                   _context.OrderItems,
+                   d => d.id,
+                   o => o.idDrink,
+                   (d, o) => new { Drink = d, OrderItem = o }
+               )
+               .ToList(); // Retrieve the data from the database
 
             var query = drinkOrderItems
                 .GroupBy(x => x.Drink)
@@ -206,10 +205,16 @@ namespace SmartCafe.Controllers
                 .OrderByDescending(x => x.OrderItemCount)
                 .FirstOrDefault();
 
-            return query?.Drink.name;
+            return query?.Drink;
+        }
+        public string MostSoldDrink()
+        {
+            return MostUsedDrink().name;
         }
 
-
-
+        public void Clone()
+        {
+            Drink drink = MostUsedDrink();
+        }
     }
 }
