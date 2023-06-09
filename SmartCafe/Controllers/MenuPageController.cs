@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartCafe.Data;
+using SmartCafe.Interfaces;
 using SmartCafe.Models;
 
 namespace SmartCafe.Controllers
 {
-    public class MenuPageController : Controller
+    public class MenuPageController : Controller, IDrink
     {
         private readonly ApplicationDbContext _context;
 

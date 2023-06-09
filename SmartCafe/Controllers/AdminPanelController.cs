@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartCafe.Data;
+using SmartCafe.Interfaces;
 using SmartCafe.Models;
 
 namespace SmartCafe.Controllers
 {
     [Authorize (Roles = "Administrator")]
-    public class AdminPanelController : Controller
+    public class AdminPanelController : Controller, IStatistic
     {
         private readonly ApplicationDbContext _context;
 
@@ -188,7 +189,7 @@ namespace SmartCafe.Controllers
             return totalProfit;
         }
 
-        private string MostSoldDrink()
+        public string MostSoldDrink()
         {
             var drinkOrderItems = _context.Drinks
                 .Join(

@@ -10,5 +10,6 @@ namespace SmartCafe.Models
         public double price { get; set; }
 
         public Drink() { }
+       
     }
 }

@@ -265,7 +265,6 @@
                 quantityInputs.forEach(function (input) {
                     const quantity = parseInt(input.value);
                     const drinkId = input.parentElement.querySelector('.minus-btn').getAttribute('data-drink-id');
-
                     if (quantity > 0) {
                         selectedDrinks.push({ drinkId: drinkId, quantity: quantity });
                     }
