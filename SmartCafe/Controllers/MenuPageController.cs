@@ -20,21 +20,14 @@ namespace SmartCafe.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string tableNumber)
         {
             var drinks = await _context.Drinks.ToListAsync();
             ViewBag.Drinks = drinks;
-
-            if (TempData.ContainsKey("SelectedTableNumber"))
-            {
-                var selectedTableNumber = TempData["SelectedTableNumber"].ToString();
-                TempData["SelectedTableNumber"] = selectedTableNumber;
-                ViewBag.TableNumber = selectedTableNumber;
-            }
+            ViewBag.SelectedTableNumber = tableNumber;
 
             return View(drinks);
         }
-
 
 
         public async Task<IActionResult> DrinksIndex()

@@ -19,9 +19,9 @@ namespace SmartCafe.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks, int tableNumber)
+        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks)
         {
-            TempData["SelectedTableNumber"] = tableNumber;
+            string tableNumber = Request.Form["tableNumber"];
             var applicationDbContext = _context.Orders.Include(o => o.Guest);
 
             var drinkIds = selectedDrinks.Keys.ToList();
@@ -39,11 +39,7 @@ namespace SmartCafe.Controllers
             }
 
             ViewBag.SelectedDrinks = selectedDrinksList;
-
-            if (TempData.ContainsKey("SelectedTableNumber"))
-            {
-                ViewBag.SelectedTableNumber = TempData["SelectedTableNumber"].ToString();
-            }
+            ViewBag.TableNumber = tableNumber;
 
             return View(await applicationDbContext.ToListAsync());
         }

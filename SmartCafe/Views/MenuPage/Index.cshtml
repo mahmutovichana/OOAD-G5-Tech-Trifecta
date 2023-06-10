@@ -173,6 +173,7 @@
                 font-size: 16px;
                 cursor: pointer;
                 transition: background-color 0.3s;
+                margin-bottom: 20px;
             }
 
                 .finish-order button:hover {
@@ -231,7 +232,8 @@
     <div class="finish-order">
         <button id="finish-order-btn" type="button" onclick="submitOrder()">Finish Order</button>
         <!-- Table Number label -->
-<label id="table-number-label"></label>
+        <p>Selected Table Number: @ViewBag.SelectedTableNumber</p>
+
     </div>
 
     <script>
@@ -280,6 +282,13 @@
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/ModifyOrder';
+
+                // Create a hidden input field for the selected table number
+                const tableNumberInput = document.createElement('input');
+                tableNumberInput.type = 'hidden';
+                tableNumberInput.name = 'tableNumber';
+                tableNumberInput.value = '@ViewBag.SelectedTableNumber';
+                form.appendChild(tableNumberInput);
 
                 selectedDrinks.forEach(function (drink) {
                     const drinkIdInput = document.createElement('input');

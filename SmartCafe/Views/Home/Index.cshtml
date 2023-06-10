@@ -113,6 +113,27 @@
             background-color: #9c1650;
         }
 
+        .learn-more-button{
+            font-family: Montserrat;
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .learn-more-button:hover {
+            opacity: 1;
+        }
+
         .ok-button {
             font-family: Montserrat;
             background-color: black;
@@ -154,34 +175,75 @@
                 margin: 10px;
             }
 
-        .our-story {
+
+        .home-get-started {
+            width: 100%;
             display: flex;
+            position: relative;
+            max-width: var(--dl-size-size-maxwidth);
             align-items: center;
-            margin-top: 0px;
+            padding-top: var(--dl-space-space-fiveunits);
+            padding-left: var(--dl-space-space-fiveunits);
+            padding-right: var(--dl-space-space-fiveunits);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-fiveunits);
+            justify-content: space-between;
         }
 
-        .our-story-img {
-            max-height: 20%;
-            max-width: 20%;
-            flex: 1;
-            float: left;
+        .home-header-container1 {
+            gap: var(--dl-space-space-threeunits);
+            display: flex;
+            z-index: 100;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        .our-story-text {
-            flex: 1;
-            float: right;
-            padding: 0 10px;
+        .home-header09 {
+            gap: var(--dl-space-space-oneandhalfunits);
+            width: 100%;
+            display: flex;
+            max-width: 800px;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-            .our-story-text h2 {
-                font-size: 24px;
-                margin-bottom: 10px;
-            }
+        .home-heading06 {
+            color: rgb(255, 255, 255);
+            font-size: 60px;
+            font-style: normal;
+            font-weight: 400;
+            margin-left: 20px;
+        }
 
-            .our-story-text p {
-                font-size: 16px;
-                line-height: 1.5;
-            }
+        .home-caption14 {
+            color: white;
+            font-size: 24px;
+            max-width: 600px;
+            line-height: 36px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .home-button1 {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        .home-image05 {
+            top: 0px;
+            right: 40px;
+            width: 720px;
+            bottom: 20px;
+            margin: auto;
+            position: absolute;
+            object-fit: cover;
+        }
 
         footer {
             background-color: #333;
@@ -288,15 +350,28 @@
         <img src="~/images/philipsLogo.png" alt="Partner 5">
     </div>
 
-    <div class="our-story">
-        <div class="our-story-img">
-            <img src="~/images/celebratingWithDrinks.jpg" alt="Our Story Image">
+    <section class="home-get-started">
+        <div class="home-header-container1">
+            <div class="home-header09">
+                <h2 class="home-heading06">
+                    Our Story
+                </h2>
+                <p class="home-caption14">
+                    At Lagoon Cocktail Bar, we believe that the art of mixology is more than just creating delicious drinks - it's about crafting unique experiences that leave a lasting impression. Our team of passionate bartenders is dedicated to perfecting every detail, from the quality of the ingredients to the presentation of the final product.
+                </p>
+            </div>
+            <div class="learn-more-button">
+                <button class="button"><span>Learn more</span></button>
+            </div>
         </div>
-        <div class="our-story-text">
-            <h2>Our Story</h2>
-            <p>At Lagoon Cocktail Bar, we believe that the art of mixology is more than just creating delicious drinks - it's about crafting unique experiences that leave a lasting impression. Our team of passionate bartenders is dedicated to perfecting every detail, from the quality of the ingredients to the presentation of the final product.</p>
-        </div>
-    </div>
+        <img src="~/images/celebratingWithDrinks.jpg" alt="Our Story Image" class="home-image05">
+    </section>
+
+    <script>
+        document.getElementById('learn-more-button').addEventListener('click', function () {
+            window.location.href = '/Home/Index';
+        });
+    </script>
 
 
     <footer>
@@ -358,8 +433,6 @@
            
         });
     </script>
-
-
 
 </body>
 </html>
