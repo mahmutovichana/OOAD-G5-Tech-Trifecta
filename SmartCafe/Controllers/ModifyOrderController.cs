@@ -41,74 +41,62 @@ namespace SmartCafe.Controllers
             ViewBag.SelectedDrinks = selectedDrinksList;
             ViewBag.TableNumber = tableNumber;
 
-            // Start background task to save the order
-            await Task.Run(() => SaveOrder(selectedDrinksList, tableNumber));
+
+            // Delayed save order
+            _ = Task.Run(() =>
+            {
+                Thread.Sleep(10000); // Delay of 10 seconds
+                SaveOrder(selectedDrinksList, tableNumber, _context);
+            });
 
             return RedirectToAction("Index", "ModifyOrder");
+
         }
 
-        private void SaveOrder(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber)
+
+        private void SaveOrder(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber, ApplicationDbContext context)
         {
-            // Pretražite postojeće porudžbine na osnovu broja stola
-            var existingOrder = _context.Orders.FirstOrDefault(o => o.tableNumber == tableNumberValue && !o.done);
-
-            if (existingOrder != null)
+            // Simulate delay
+            Thread.Sleep(5000);
+            if (int.TryParse(tableNumber, out int tableNumberValue))
             {
-                // Ažurirajte postojeću porudžbinu
-                foreach (var tuple in selectedDrinksList)
-                {
-                    // Proverite da li stavka već postoji u porudžbini
-                    var existingOrderItem = existingOrder.OrderItems.FirstOrDefault(oi => oi.Drink.name == tuple.Item1);
-
-                    if (existingOrderItem != null)
-                    {
-                        // Ažurirajte količinu ili bilo koju drugu informaciju
-                        existingOrderItem.quantity += tuple.Item2;
-                    }
-                    else
-                    {
-                        // Dodajte novu stavku u porudžbinu
-                        var orderItem = new OrderItem
-                        {
-                            Drink = new Drink { name = tuple.Item1, price = tuple.Item3 },
-                            Order = existingOrder,
-                            price = tuple.Item3,
-                            quantity = tuple.Item2
-                        };
-
-                        _context.OrderItems.Add(orderItem);
-                    }
-                }
-            }
-            else
-            {
-                // Kreirajte novu porudžbinu
+                // Create new Order instance
                 var order = new Order
                 {
                     done = false,
                     tableNumber = int.Parse(tableNumber),
                     orderTime = DateTime.Now,
-                    Guest = new Guest() // Zamijenite sa stvarnim gostom
+                    Guest = new Guest() // Replace with actual guest
                 };
 
                 _context.Orders.Add(order);
 
                 foreach (var tuple in selectedDrinksList)
                 {
-                    var orderItem = new OrderItem
-                    {
-                        Drink = new Drink { name = tuple.Item1, price = tuple.Item3 },
-                        Order = order,
-                        price = tuple.Item3,
-                        quantity = tuple.Item2
-                    };
+                    var drinkName = tuple.Item1;
 
-                    _context.OrderItems.Add(orderItem);
+                    // Pretraga pića u bazi podataka na osnovu imena
+                    var drink = _context.Drinks.FirstOrDefault(d => d.name == drinkName);
+
+                    if (drink != null)
+                    {
+                        for (int i = 0; i < tuple.Item2; i++)
+                        {
+                            var orderItem = new OrderItem
+                            {
+                                Drink = drink, // Povezivanje sa postojecim pićem iz menija
+                                Order = order,
+                                price = tuple.Item3
+                            };
+
+                            _context.OrderItems.Add(orderItem);
+                        }
+                    }
                 }
             }
-
             _context.SaveChanges();
         }
+
 
         // GET: ModifyOrder/Details/5
         public async Task<IActionResult> Details(int? id)
