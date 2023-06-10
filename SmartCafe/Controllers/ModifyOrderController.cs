@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,9 +20,8 @@ namespace SmartCafe.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks)
+        public async Task<IActionResult> Index(string tableNumber, Dictionary<int, int> selectedDrinks)
         {
-            string tableNumber = Request.Form["tableNumber"];
             var applicationDbContext = _context.Orders.Include(o => o.Guest);
 
             var drinkIds = selectedDrinks.Keys.ToList();
@@ -41,10 +41,74 @@ namespace SmartCafe.Controllers
             ViewBag.SelectedDrinks = selectedDrinksList;
             ViewBag.TableNumber = tableNumber;
 
-            return View(await applicationDbContext.ToListAsync());
+            // Start background task to save the order
+            await Task.Run(() => SaveOrder(selectedDrinksList, tableNumber));
+
+            return RedirectToAction("Index", "ModifyOrder");
         }
 
+        private void SaveOrder(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber)
+        {
+            // Pretražite postojeće porudžbine na osnovu broja stola
+            var existingOrder = _context.Orders.FirstOrDefault(o => o.tableNumber == tableNumberValue && !o.done);
 
+            if (existingOrder != null)
+            {
+                // Ažurirajte postojeću porudžbinu
+                foreach (var tuple in selectedDrinksList)
+                {
+                    // Proverite da li stavka već postoji u porudžbini
+                    var existingOrderItem = existingOrder.OrderItems.FirstOrDefault(oi => oi.Drink.name == tuple.Item1);
+
+                    if (existingOrderItem != null)
+                    {
+                        // Ažurirajte količinu ili bilo koju drugu informaciju
+                        existingOrderItem.quantity += tuple.Item2;
+                    }
+                    else
+                    {
+                        // Dodajte novu stavku u porudžbinu
+                        var orderItem = new OrderItem
+                        {
+                            Drink = new Drink { name = tuple.Item1, price = tuple.Item3 },
+                            Order = existingOrder,
+                            price = tuple.Item3,
+                            quantity = tuple.Item2
+                        };
+
+                        _context.OrderItems.Add(orderItem);
+                    }
+                }
+            }
+            else
+            {
+                // Kreirajte novu porudžbinu
+                var order = new Order
+                {
+                    done = false,
+                    tableNumber = int.Parse(tableNumber),
+                    orderTime = DateTime.Now,
+                    Guest = new Guest() // Zamijenite sa stvarnim gostom
+                };
+
+                _context.Orders.Add(order);
+
+                foreach (var tuple in selectedDrinksList)
+                {
+                    var orderItem = new OrderItem
+                    {
+                        Drink = new Drink { name = tuple.Item1, price = tuple.Item3 },
+                        Order = order,
+                        price = tuple.Item3,
+                        quantity = tuple.Item2
+                    };
+
+                    _context.OrderItems.Add(orderItem);
+                }
+            }
+
+            _context.SaveChanges();
+        }
 
         // GET: ModifyOrder/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -177,52 +241,5 @@ namespace SmartCafe.Controllers
             return _context.Orders.Any(e => e.id == id);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveOrder([FromBody] Dictionary<int, int> selectedDrinks, int tableNumber)
-        {
-            // Stvaranje nove narudžbe
-            var order = new Order
-            {
-                done = false,
-                tableNumber = tableNumber,
-                orderTime = DateTime.Now,
-                idGuest = tableNumber
-            };
-
-            // Dodavanje nove narudžbe u bazu podataka
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
-
-            // Iteriranje kroz odabrana pića i stvaranje povezanih OrderItem zapisa
-            foreach (var drinkEntry in selectedDrinks)
-            {
-                var drinkId = drinkEntry.Key;
-                var quantity = drinkEntry.Value;
-
-                // Pronalaženje odabranog pića iz baze podataka
-                var drink = await _context.Drinks.FindAsync(drinkId);
-
-                if (drink != null)
-                {
-                    // Stvaranje novog OrderItem zapisa
-                    var orderItem = new OrderItem
-                    {
-                        idDrink = drinkId,
-                        idOrder = order.id, // ID nove narudžbe
-                        price = drink.price
-                    };
-
-                    // Dodavanje OrderItem zapisa u bazu podataka
-                    _context.OrderItems.Add(orderItem);
-                }
-            }
-
-            // Spremanje promjena u bazu podataka
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Index");
         }
-
-    }
 }

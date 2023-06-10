@@ -281,7 +281,7 @@
                 // Create a form and append selectedDrinks as hidden inputs
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = '/ModifyOrder';
+                form.action = '/ModifyOrder/Index?tableNumber=@ViewBag.SelectedTableNumber';  // Dodavanje tableNumber u rutu
 
                 // Create a hidden input field for the selected table number
                 const tableNumberInput = document.createElement('input');
