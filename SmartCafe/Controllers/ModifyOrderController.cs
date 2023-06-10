@@ -19,14 +19,36 @@ namespace SmartCafe.Controllers
         {
             _context = context;
         }
-
-        // GET: ModifyOrder
-        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks)
+        public async Task<IActionResult> Index(Dictionary<int, int> selectedDrinks, int tableNumber)
         {
+            TempData["SelectedTableNumber"] = tableNumber;
             var applicationDbContext = _context.Orders.Include(o => o.Guest);
-            ViewBag.SelectedDrinks = selectedDrinks;
+
+            var drinkIds = selectedDrinks.Keys.ToList();
+            var drinks = await _context.Drinks.Where(d => drinkIds.Contains(d.id)).ToListAsync();
+
+            var selectedDrinksList = new List<Tuple<string, int, double>>();
+
+            foreach (var drink in drinks)
+            {
+                if (selectedDrinks.TryGetValue(drink.id, out var quantity))
+                {
+                    var price = drink.price;
+                    selectedDrinksList.Add(Tuple.Create(drink.name, quantity, price));
+                }
+            }
+
+            ViewBag.SelectedDrinks = selectedDrinksList;
+
+            if (TempData.ContainsKey("SelectedTableNumber"))
+            {
+                ViewBag.SelectedTableNumber = TempData["SelectedTableNumber"].ToString();
+            }
+
             return View(await applicationDbContext.ToListAsync());
         }
+
+
 
         // GET: ModifyOrder/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -158,14 +180,53 @@ namespace SmartCafe.Controllers
         {
             return _context.Orders.Any(e => e.id == id);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Proba(Dictionary<int, int> selectedDrinks)
+        public async Task<IActionResult> SaveOrder([FromBody] Dictionary<int, int> selectedDrinks, int tableNumber)
         {
-            foreach(var nesto in selectedDrinks)
-            Console.WriteLine(nesto);
+            // Stvaranje nove narudžbe
+            var order = new Order
+            {
+                done = false,
+                tableNumber = tableNumber,
+                orderTime = DateTime.Now,
+                idGuest = tableNumber
+            };
 
-            return RedirectToAction(nameof(Index));
+            // Dodavanje nove narudžbe u bazu podataka
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            // Iteriranje kroz odabrana pića i stvaranje povezanih OrderItem zapisa
+            foreach (var drinkEntry in selectedDrinks)
+            {
+                var drinkId = drinkEntry.Key;
+                var quantity = drinkEntry.Value;
+
+                // Pronalaženje odabranog pića iz baze podataka
+                var drink = await _context.Drinks.FindAsync(drinkId);
+
+                if (drink != null)
+                {
+                    // Stvaranje novog OrderItem zapisa
+                    var orderItem = new OrderItem
+                    {
+                        idDrink = drinkId,
+                        idOrder = order.id, // ID nove narudžbe
+                        price = drink.price
+                    };
+
+                    // Dodavanje OrderItem zapisa u bazu podataka
+                    _context.OrderItems.Add(orderItem);
+                }
+            }
+
+            // Spremanje promjena u bazu podataka
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
+
     }
 }

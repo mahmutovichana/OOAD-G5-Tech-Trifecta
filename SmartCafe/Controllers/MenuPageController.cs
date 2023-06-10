@@ -20,13 +20,22 @@ namespace SmartCafe.Controllers
             _context = context;
         }
 
-        // GET: MenuPage
         public async Task<IActionResult> Index()
         {
-            var drinks = _context.Drinks.ToList();
+            var drinks = await _context.Drinks.ToListAsync();
             ViewBag.Drinks = drinks;
-            return View(await _context.Drinks.ToListAsync());
+
+            if (TempData.ContainsKey("SelectedTableNumber"))
+            {
+                var selectedTableNumber = TempData["SelectedTableNumber"].ToString();
+                TempData["SelectedTableNumber"] = selectedTableNumber;
+                ViewBag.TableNumber = selectedTableNumber;
+            }
+
+            return View(drinks);
         }
+
+
 
         public async Task<IActionResult> DrinksIndex()
         {
@@ -34,8 +43,6 @@ namespace SmartCafe.Controllers
             var drinks = GetDrinksFromDatabase(options);
             return View(await drinks.ToListAsync());
         }
-
-
 
         // GET: MenuPage/Details/5
         public async Task<IActionResult> Details(int? id)

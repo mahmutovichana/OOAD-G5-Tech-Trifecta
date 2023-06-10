@@ -854,3 +854,7 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\QRCode
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\System.Drawing.Common.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\QRCoder.dll
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Administrator\Desktop\OOAD-G5-Tech-Trifecta\SmartCafe\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

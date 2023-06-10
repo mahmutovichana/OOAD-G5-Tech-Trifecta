@@ -54,8 +54,8 @@ namespace SmartCafe.Controllers
 
         public IActionResult SelectTable(string tableNumber)
         {
-            ViewData["SelectedTableNumber"] = tableNumber;
-            return View();
+            TempData["SelectedTableNumber"] = tableNumber;
+            return RedirectToAction("Index", "MenuPage");
         }
     }
 }

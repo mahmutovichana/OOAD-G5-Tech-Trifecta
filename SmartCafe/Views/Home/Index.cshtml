@@ -349,13 +349,13 @@
                 var tableNumber = event.target.getAttribute('data-table');
                 dropdownButton.textContent = tableNumber;
             });
-
-            var okButton = document.getElementById('ok-button');
+ var okButton = document.getElementById('ok-button');
             okButton.addEventListener('click', function () {
                 var selectedTableNumber = dropdownButton.textContent;
                 // Make a request to the HomeController with the selectedTableNumber
                 window.location.href = '@Url.Action("Index", "MenuPage")?tableNumber=' + selectedTableNumber;
             });
+           
         });
     </script>
 

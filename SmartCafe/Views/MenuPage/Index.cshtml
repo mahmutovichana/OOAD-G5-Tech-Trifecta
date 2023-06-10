@@ -222,10 +222,16 @@
             }
         }
     </div>
+    @{
+        var tableNumber = ViewBag.TableNumber;
+        var selectedDrinks = ViewBag.SelectedDrinks as List<Tuple<string, int, double>>;
+    }
 
     <!-- Finish Order button -->
     <div class="finish-order">
-        <button id="finish-order-btn" type="button">Finish Order</button>
+        <button id="finish-order-btn" type="button" onclick="submitOrder()">Finish Order</button>
+        <!-- Table Number label -->
+<label id="table-number-label"></label>
     </div>
 
     <script>
@@ -287,6 +293,12 @@
                 document.body.appendChild(form);
                 form.submit();
             });
+
+            function getDrinkNameById(drinkId) {
+                const drinks = @Html.Raw(Json.Serialize(Model));
+                const drink = drinks.find(d => d.id === drinkId);
+                return drink ? drink.name : 'Nepoznato';
+            }
         });
     </script>
 
