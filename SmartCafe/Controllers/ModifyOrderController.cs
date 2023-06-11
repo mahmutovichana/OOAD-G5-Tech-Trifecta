@@ -276,6 +276,32 @@ namespace SmartCafe.Controllers
         {
             return _context.Orders.Any(e => e.id == id);
         }
+        [HttpPost]
+        public IActionResult CancelOrder()
+        {
+            // Dobivanje stolnog broja narudžbe iz zahtjeva
+            string tableNumber = Request.Form["tableNumber"];
 
+            // Provjera uvjeta: order nije označen kao "done" i tableNumber nije null
+            if (!string.IsNullOrEmpty(tableNumber))
+            {
+                var order = _context.Orders.FirstOrDefault(o => o.tableNumber == Int32.Parse(tableNumber) && !o.done);
+                if (order != null)
+                {
+                    // Pronađene su narudžba i stavke narudžbe koje zadovoljavaju uvjete, pa se brišu iz baze podataka
+                    _context.Orders.Remove(order);
+                    _context.SaveChanges();
+
+                    // Ovdje možete dodati dodatnu logiku ili poruke za prikaz korisniku
+
+                    // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            // Ako nijedna narudžba nije zadovoljila uvjete, vraća se ista stranica ili prikazuje poruka o pogrešci
+            return View();
         }
+
+    }
 }

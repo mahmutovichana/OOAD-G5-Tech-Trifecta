@@ -8,29 +8,7 @@
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Poziv akcije nakon što je stranica učitana
-        callSaveOrderAction();
-    });
 
-    function callSaveOrderAction() {
-        // AJAX poziv ka akciji SaveOrder
-        $.ajax({
-            url: '/ModifyOrder/SaveOrder',
-            type: 'POST',
-            data: {
-                // Dodajte potrebne parametre ako ih ima
-            },
-            success: function (response) {
-                // Ovdje možete dodati logiku koju želite izvršiti nakon poziva akcije
-            },
-            error: function (xhr, status, error) {
-                // Ovdje možete dodati logiku za rukovanje greškama ako je potrebno
-            }
-        });
-    }
-</script>
 
 
 <!DOCTYPE html>
@@ -267,7 +245,11 @@
         <div class="buttons">
             <h1>Order details</h1>
             <button class="btn" id="modify-order-btn" type="button">Modify</button>
-            <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'" type="button">Cancel</button>
+            <form id="cancel-order-form" method="post" action="@Url.Action("CancelOrder", "ModifyOrder")">
+                <button class="btn" id="cancel-order-btn" type="submit">Cancel</button>
+            </form>
+
+
         </div>
     </div>
     <script>
@@ -379,7 +361,12 @@
             return number.toString().padStart(2, '0');
         }*/
     </script>
-
+    <script>
+        const cancelOrderForm = document.getElementById('cancel-order-form');
+        cancelOrderForm.addEventListener('submit', function () {
+           
+        });
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
