@@ -270,6 +270,7 @@
                 const selectedDrinks = [];
                 const quantityInputs = document.querySelectorAll('.quantity-input');
 
+
                 quantityInputs.forEach(function (input) {
                     const quantity = parseInt(input.value);
                     const drinkId = input.parentElement.querySelector('.minus-btn').getAttribute('data-drink-id');

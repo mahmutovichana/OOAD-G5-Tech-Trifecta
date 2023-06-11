@@ -7,6 +7,32 @@
     Layout = null;
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Poziv akcije nakon što je stranica učitana
+        callSaveOrderAction();
+    });
+
+    function callSaveOrderAction() {
+        // AJAX poziv ka akciji SaveOrder
+        $.ajax({
+            url: '/ModifyOrder/SaveOrder',
+            type: 'POST',
+            data: {
+                // Dodajte potrebne parametre ako ih ima
+            },
+            success: function (response) {
+                // Ovdje možete dodati logiku koju želite izvršiti nakon poziva akcije
+            },
+            error: function (xhr, status, error) {
+                // Ovdje možete dodati logiku za rukovanje greškama ako je potrebno
+            }
+        });
+    }
+</script>
+
+
 <!DOCTYPE html>
 <html>
 <head>

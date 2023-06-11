@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartCafe.Data;
@@ -25,7 +26,7 @@ namespace SmartCafe.Controllers
             var applicationDbContext = _context.Orders.Include(o => o.Guest);
 
             var drinkIds = selectedDrinks.Keys.ToList();
-            var drinks = await _context.Drinks.Where(d => drinkIds.Contains(d.id)).ToListAsync();
+            var drinks = _context.Drinks.Where(d => drinkIds.Contains(d.id)).ToList();
 
             var selectedDrinksList = new List<Tuple<string, int, double>>();
 
@@ -41,62 +42,101 @@ namespace SmartCafe.Controllers
             ViewBag.SelectedDrinks = selectedDrinksList;
             ViewBag.TableNumber = tableNumber;
 
+            TempData["SelectedDrinksList"] = selectedDrinksList;
+            TempData["TableNumber"] = tableNumber;
 
-            // Delayed save order
-            _ = Task.Run(() =>
+            if (TempData["OrderSaved"] != null && (bool)TempData["OrderSaved"])
             {
-                Thread.Sleep(10000); // Delay of 10 seconds
-                SaveOrder(selectedDrinksList, tableNumber, _context);
-            });
+                ViewBag.OrderSaved = true; // Postavljamo ViewBag.OrderSaved na true ako je narudžba uspješno spremljena
+                TempData["OrderSaved"] = false; // Resetiramo privremene podatke
+            }
 
-            return RedirectToAction("Index", "ModifyOrder");
-
+            return View(await applicationDbContext.ToListAsync());
         }
 
 
-        private void SaveOrder(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber, ApplicationDbContext context)
+        public async Task AfterIndex(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber)
         {
-            // Simulate delay
-            Thread.Sleep(5000);
+            // Delay for 10 secs before calling SaveOrder
+            await Task.Delay(10000);
+
+            // Call SaveOrder action
+            SaveOrder(selectedDrinksList, tableNumber);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveOrder(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber)
+        {
             if (int.TryParse(tableNumber, out int tableNumberValue))
             {
-                // Create new Order instance
-                var order = new Order
+                var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+                optionsBuilder.UseSqlServer("Data Source=SQL6031.site4now.net;Initial Catalog=db_a99f6b_techtrifecta1;User Id=db_a99f6b_techtrifecta1_admin;Password=Prekucatcuovo1!"); // Zamijenite sa stvarnim Connection Stringom
+
+                using (var context = new ApplicationDbContext(optionsBuilder.Options))
                 {
-                    done = false,
-                    tableNumber = int.Parse(tableNumber),
-                    orderTime = DateTime.Now,
-                    Guest = new Guest() // Replace with actual guest
-                };
+                    var order = await context.Orders.FirstOrDefaultAsync(o => o.tableNumber == tableNumberValue && !o.done);
 
-                _context.Orders.Add(order);
-
-                foreach (var tuple in selectedDrinksList)
-                {
-                    var drinkName = tuple.Item1;
-
-                    // Pretraga pića u bazi podataka na osnovu imena
-                    var drink = _context.Drinks.FirstOrDefault(d => d.name == drinkName);
-
-                    if (drink != null)
+                    if (order == null)
                     {
-                        for (int i = 0; i < tuple.Item2; i++)
+                        order = new Order
                         {
-                            var orderItem = new OrderItem
-                            {
-                                Drink = drink, // Povezivanje sa postojecim pićem iz menija
-                                Order = order,
-                                price = tuple.Item3
-                            };
+                            done = false,
+                            tableNumber = int.Parse(tableNumber),
+                            orderTime = DateTime.Now,
+                            Guest = new Guest() // Zamijeni sa stvarnim gostom
+                        };
 
-                            _context.OrderItems.Add(orderItem);
+                        context.Orders.Add(order);
+                        await context.SaveChangesAsync(); // Spremi narudžbu kako bismo dobili ID
+                    }
+
+                    foreach (var tuple in selectedDrinksList)
+                    {
+                        var drinkName = tuple.Item1;
+
+                        var drink = context.Drinks.FirstOrDefault(d => d.name == drinkName);
+
+                        if (drink != null)
+                        {
+                            for (int i = 0; i < tuple.Item2; i++)
+                            {
+                                var orderItem = new OrderItem
+                                {
+                                    Drink = drink,
+                                    Order = order,
+                                    price = tuple.Item3
+                                };
+
+                                context.OrderItems.Add(orderItem);
+                            }
                         }
                     }
+
+                    await context.SaveChangesAsync();
+
+                    TempData["OrderSaved"] = true; // Postavljamo privremene podatke za redirekciju
                 }
             }
-            _context.SaveChanges();
+
+            return View("Index");
         }
 
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
+
+            // Dohvati podatke iz TempData
+            var selectedDrinksList = TempData["SelectedDrinksList"] as List<Tuple<string, int, double>>;
+            var tableNumber = TempData["TableNumber"] as string;
+
+            if (selectedDrinksList != null && tableNumber != null)
+            {
+                // Pozovi AfterIndex metodu
+                AfterIndex(selectedDrinksList, tableNumber);
+            }
+        }
 
         // GET: ModifyOrder/Details/5
         public async Task<IActionResult> Details(int? id)
