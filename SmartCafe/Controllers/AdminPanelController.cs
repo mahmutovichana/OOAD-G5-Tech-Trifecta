@@ -174,9 +174,7 @@ namespace SmartCafe.Controllers
                 .Join(_context.OrderItems, o => o.id, oi => oi.idOrder, (order, orderItem) => new { Order = order, OrderItem = orderItem })
                 .Sum(oi => oi.OrderItem.price);
 
-          
-
-            return dailyProfit;
+            return Math.Round(dailyProfit, 2);
         }
 
         public double TotalProfit()
@@ -185,9 +183,9 @@ namespace SmartCafe.Controllers
                 .Join(_context.OrderItems, o => o.id, oi => oi.idOrder, (order, orderItem) => new { Order = order, OrderItem = orderItem })
                 .Sum(oi => oi.OrderItem.price);
 
-
-            return totalProfit;
+            return Math.Round(totalProfit, 2);
         }
+
         private Drink MostUsedDrink()
         {
             var drinkOrderItems = _context.Drinks

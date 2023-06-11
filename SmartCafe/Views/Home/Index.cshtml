@@ -58,6 +58,10 @@
             margin-top: -20px;
         }
 
+        .headline {
+            margin-left: 7%;
+        }
+
         .buttons-container {
             display: flex;
             gap: 10px;
@@ -156,14 +160,15 @@
             }
 
         .bartenderSippin-img {
-            max-height: 50%;
-            max-width: 50%;
+            width: 400px; /* Prilagodite širinu prema potrebama */
+            height: auto;
             float: right;
-            margin-left: 20px;
+            margin-left: 15px;
+            margin-right: 15%;
             border-radius: 20px;
             box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            radius: 2px;
         }
+
 
         .partners {
             text-align: center;
@@ -250,6 +255,7 @@
             padding: 10px 0;
             color: #fff;
             text-align: center;
+            margin-top: 10%;
         }
 
         .footer-content {
@@ -303,8 +309,8 @@
 
         <ul class="nav">
             <li><a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>
+            <!--<li><a asp-area="" asp-controller="Home" asp-action="Index">About Us</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact</a></li>-->
             <li><a class="active" asp-area="Identity" asp-page="/Account/Login">Staff Login</a></li>
         </ul>
     </div>
@@ -352,7 +358,7 @@
         <img src="~/images/googleLogo.png" alt="Partner 4">
         <img src="~/images/philipsLogo.png" alt="Partner 5">
     </div>
-
+    <!--
     <section class="home-get-started">
         <div class="home-header-container1">
             <div class="home-header09">
@@ -375,7 +381,7 @@
             window.location.href = '/Home/Index';
         });
     </script>
-
+    -->
 
     <footer>
         <div class="footer-content">

@@ -78,6 +78,10 @@
             margin: 10%;
         }
 
+        .orderItems{
+            color: black;
+        }
+
         .order-details {
             flex: 1;
             background-color: #ffffff;
@@ -204,8 +208,8 @@
             <h2>Ordered Items</h2>
 
             <!-- Table Number label -->
-            <label id="table-number-label">Table Number: @ViewBag.TableNumber</label>
-            <table>
+            <!--<label id="table-number-label">Table Number: @@ViewBag.TableNumber</label>-->
+            <table class="orderItems">
                 <thead>
                     <tr>
                         <th>Drink Name</th>
@@ -269,107 +273,28 @@
             });
 
         // Extract and display Table Number
-        /*
-        var urlParams = new URLSearchParams(window.location.search);
-        var tableNumberValue = urlParams.get('tableNumber');
-        var tableNumberLabel = document.getElementById('table-number-label');
-        tableNumberLabel.innerText = 'Table Number: ' + @ViewBag.tableNumber;*/
+            const timerElement = document.getElementById('timer');
+            let remainingTime = 10; // Vrijeme u sekundama (3 minute)
 
-        /*
-        function saveOrder() {
-            const selectedDrinks = Html.Raw(selectedDrinksJson);
-            const tableNumber = tableNumber;
-            const csrfToken = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            const timerInterval = setInterval(updateTimer, 1000);
 
-            // Pozovi akciju "SaveOrder" putem AJAX poziva
-            fetch('/ModifyOrder/SaveOrder', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'RequestVerificationToken': csrfToken
-                },
-                body: JSON.stringify({ selectedDrinks: selectedDrinks, tableNumber: tableNumber })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        console.log('Order saved successfully.');
-                        document.getElementById('order-saved-message').style.display = 'inline';
-                    } else {
-                        throw new Error('Error saving order: Invalid response from the server.');
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    console.log('Response status:', error.response.status);
-                    console.log('Response body:', error.response.text());
-                    document.getElementById('order-saved-message').textContent = `Error: ${error.message}`;
-                    document.getElementById('order-saved-message').style.display = 'inline';
-                });
-        }
+            function updateTimer() {
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = remainingTime % 60;
 
+                timerElement.textContent = `Time remaining: ${padNumber(minutes)}:${padNumber(seconds)}`;
 
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = "Time's up!";
+                }
 
-        try {
-            saveOrder(); // Pokreni snimanje narudžbe odmah pri učitavanju stranice
-        } catch (error) {
-            console.error('Error calling saveOrder:', error);
-        }
-        /*
-        const timerElement = document.getElementById('timer');
-        let remainingTime = 10; // Vrijeme u sekundama (10 sekundi)
-
-        const timerInterval = setInterval(updateTimer, 1000);
-
-        function updateTimer() {
-            const minutes = Math.floor(remainingTime / 60);
-            const seconds = remainingTime % 60;
-
-            timerElement.textContent = `Time remaining: ${padNumber(minutes)}:${padNumber(seconds)}`;
-
-            remainingTime--;
-
-            if (remainingTime < 0) {
-                clearInterval(timerInterval);
-                saveOrder(); // Pozovi funkciju saveOrder umjesto preusmjeravanja
+                remainingTime--;
             }
-        }
 
-        function saveOrder() {
-            const selectedDrinks =  Html.Raw(selectedDrinksJson);
-            const tableNumber =  tableNumber; 
-
-            // Pozovi akciju "SaveOrder" putem AJAX poziva
-            fetch('/ModifyOrder/SaveOrder', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ selectedDrinks: selectedDrinks, tableNumber: tableNumber })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Ovdje možete manipulirati odgovorom ako je potrebno
-                    console.log('Order saved successfully.');
-
-                    // Dodajte sljedeću liniju kako biste ažurirali oznaku na pogledu
-                    document.getElementById('order-saved-message').style.display = 'block';
-                })
-                .catch(error => {
-                    // Ovdje možete obraditi grešku ako se dogodi
-                    console.error('Error saving order:', error);
-                });
-        }
-
-
-        function padNumber(number) {
-            return number.toString().padStart(2, '0');
-        }*/
+            function padNumber(number) {
+                return number.toString().padStart(2, '0');
+            }
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

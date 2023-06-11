@@ -72,45 +72,86 @@
         }
 
         table {
+            font-family: Montserrat;
+            margin: 0 auto;
+            text-align: center;
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background-color: black;
-            color: white;
-            margin: 30px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
         th,
         td {
-            border: 1px solid #ffffff;
+            border: 1px solid #dddddd;
             padding: 10px;
             text-align: center;
         }
 
         th {
-            background-color: black;
+            background-color: #f5f5f5;
             font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e0e0e0;
         }
 
         .completed-checkbox {
             cursor: pointer;
         }
 
+        .nav-item {
+            list-style-type: none;
+        }
+
+
+        .edit,
+        .completed,
+        .delete {
+            font-family: Montserrat;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+            .edit:hover,
+            .completed:hover,
+            .delete:hover {
+                background-color: #0056b3;
+            }
+
+
         /* Stilovi za carousel */
         .carousel {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 20px; /* Povećan razmak između boxova */
-            margin: 20px;
+            grid-gap: 40px; /* Povećan razmak između boxova */
+            margin: 15%;
+            margin-top: 0;
+            margin-bottom: 40px;
         }
 
         .carousel-item {
             display: flex;
+            width: fit-content;
             flex-direction: column;
             align-items: center;
             text-align: center;
             background-color: #f5f5f5;
             padding: 10px;
+            margin: 2% auto;
             border-radius: 5px;
             transition: background-color 0.3s;
             cursor: pointer;
@@ -123,15 +164,66 @@
             }
 
         .carousel-image {
+            width: 200px;
             max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
+            height: 200px; /* Podesite željenu visinu slika */
+            object-fit: cover; /* Opcionalno, postavlja pravilan omjer visine i širine */
+            border-radius: 5px;
         }
 
-        .edit .delete {
-            color:white;
+
+        .logout-button {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
             text-decoration: none;
+            font-family: sans-serif;
+            font-weight: 600;
+            font-size: 2em;
+            padding: 0.75em 1em;
+            color: #FF5A5F;
+            border: 0.15em solid #FF5A5F;
+            border-radius: calc(0.75em + 0.5em + 0.15em);
+            transition: 3s;
         }
+
+            .logout-button:before,
+            .logout-button:after {
+                content: '';
+                position: absolute;
+                top: -1.5em;
+                z-index: -1;
+                width: 200%;
+                aspect-ratio: 1;
+                border: none;
+                border-radius: 40%;
+                background-color: rgba(0, 0, 0, 0.7);
+                transition: 4s;
+            }
+
+            .logout-button:before {
+                left: -80%;
+                transform: translate3d(0, 5em, 0) rotate(-340deg);
+            }
+
+            .logout-button:after {
+                right: -80%;
+                transform: translate3d(0, 5em, 0) rotate(390deg);
+            }
+
+            .logout-button:hover,
+            .logout-button:focus {
+                color: #FFFFFF;
+            }
+
+                .logout-button:hover:before,
+                .logout-button:hover:after,
+                .logout-button:focus:before,
+                .logout-button:focus:after {
+                    transform: none;
+                    background-color: rgba(255, 90, 95, 0.75); /* Življa boja */
+                }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -146,7 +238,7 @@
             {
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-dark" id="logout-button" style="text-transform: uppercase; font-size: 16px; color: black;">LOG OUT</button>
+                        <button type="submit" class="logout-button" style="font-family: Montserrat; text-transform: uppercase; font-size: 16px; color:white; text-decoration:none;">LOG OUT</button>
                     </form>
                 </li>
             }
@@ -191,14 +283,14 @@
                         <td>
                             <form asp-action="Completed">
                                 <input type="hidden" name="id" value="@item.id" />
-                                <input type="submit" value="Completed" class="btn btn-danger" /> 
+                                <input type="submit" value="Completed" class="completed" /> 
                             </form>
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.id" class="edit">Edit</a> |
                             <form asp-action="Delete">
                                 <input type="hidden" name="id" value="@item.id" />
-                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                <input type="submit" value="Delete" class="delete" />
                             </form>
                         </td>
                     </tr>
@@ -229,11 +321,5 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script>
-        function deleteOrder(orderNumber) {
-            // Implementirati kod za brisanje narudžbe sa zadanim brojem
-            // Nakon brisanja, osvježite prikaz tabele kako bi se redak uklonio
-        }
-    </script>
 </body>
 </html>

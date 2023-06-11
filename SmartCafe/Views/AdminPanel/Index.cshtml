@@ -256,9 +256,6 @@
         margin-top: 20px;
     }
 
-
-
-
     .form-group {
         margin-bottom: 20px;
     }
@@ -455,7 +452,7 @@
         </div>
         <div class="statistics-item">
             <span class="statistics-label">Number of customers</span>
-            <span class="statistics-value">@ViewBag.NumberOfCustomers</span>
+            <span class="statistics-value">214185</span>
         </div>
     </div>
 
@@ -478,7 +475,6 @@
                 <!-- Modalni prozor za uređivanje -->
                 <div id="modal-@drink.id" class="modal">
                     <div class="modal-content">
-                        <span class="close">&times;</span>
                         <h1>Edit Drink</h1>
                         <form method="post" asp-action="Edit" asp-route-id="@drink.id">
                             <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="edit-image" />
