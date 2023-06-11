@@ -36,6 +36,7 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubT
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\Orange Blossom.jpg
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\philipsLogo.png
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\Pina Colada.jpg
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\qr_code.png
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\Red Velvet.jpg
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\Rosy Chill.jpg
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\wwwroot\images\Strawberry Mojito.jpg
@@ -125,6 +126,7 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubT
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\QRCoder.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Composition.AttributedModel.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Composition.Convention.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Composition.Hosting.dll
@@ -132,6 +134,7 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubT
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Composition.TypedParts.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Drawing.Common.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Runtime.Caching.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
@@ -199,6 +202,8 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubT
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\PubTmp\Out\SmartCafe.Views.dll

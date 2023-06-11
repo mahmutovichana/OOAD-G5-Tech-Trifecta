@@ -222,3 +222,7 @@ C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\refi
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\SmartCafe.pdb
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\SmartCafe.genruntimeconfig.cache
 C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\obj\Release\net5.0\ref\SmartCafe.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Release\net5.0\QRCoder.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Release\net5.0\System.Drawing.Common.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Release\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\User-PC\Desktop\OOAD-G3-Tech-Trifecta\SmartCafe\bin\Release\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
