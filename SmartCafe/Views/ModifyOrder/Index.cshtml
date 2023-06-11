@@ -261,6 +261,13 @@
         }
 
      <script>
+
+            setTimeout(function () {
+                document.getElementById("cancel-order-btn").disabled = true;
+                document.getElementById("modify-order-btn").disabled = true;
+            }, 180000); // wait for 3 mins
+
+
             const modifyOrderButton = document.getElementById('modify-order-btn');
             modifyOrderButton.addEventListener('click', function () {
                 history.back();
@@ -274,7 +281,7 @@
 
         // Extract and display Table Number
             const timerElement = document.getElementById('timer');
-            let remainingTime = 10; // Vrijeme u sekundama (3 minute)
+            let remainingTime = 180; // Vrijeme u sekundama (3 minute)
 
             const timerInterval = setInterval(updateTimer, 1000);
 

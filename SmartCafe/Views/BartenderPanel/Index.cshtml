@@ -4,6 +4,7 @@
 @using SmartCafe.Models
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@using System.Linq
 
 @{
     Layout = null;
@@ -64,30 +65,33 @@
         }
 
         .table-container {
-            margin: 20px auto;
-            max-width: 800px;
-            background-color: white;
+            margin: 0 auto;
+            max-width: 100%;
+            background-color: transparent;
             border-radius: 5px;
-            overflow: hidden;
+            text-align: center;
         }
 
         table {
             font-family: Montserrat;
             margin: 0 auto;
             text-align: center;
-            width: 100%;
             border-collapse: collapse;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2%;
+            width: fit-content;
         }
 
         th,
         td {
             border: 1px solid #dddddd;
-            padding: 10px;
             text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap; /* Dodat stil za sprečavanje preloma teksta u ćelijama */
         }
 
         th {
@@ -97,11 +101,18 @@
 
         tbody tr:nth-child(even) {
             background-color: #f9f9f9;
+            vertical-align: center;
         }
 
         tbody tr:hover {
             background-color: #e0e0e0;
         }
+
+        td:last-child {
+            display: flex;
+            justify-content: space-around;
+        }
+
 
         .completed-checkbox {
             cursor: pointer;
@@ -116,6 +127,7 @@
         .completed,
         .delete {
             font-family: Montserrat;
+            font-size: 12px;
             display: inline-block;
             padding: 8px 12px;
             border-radius: 4px;
@@ -234,6 +246,7 @@
             <img src="~/images/lagoonLogoWhiteTransparent.png" alt="Logo">
         </div>
         <ul class="navbar-nav">
+            <h1 style="margin-right:2px;">Bartender Panel</h1>
             @if (SignInManager.IsSignedIn(User))
             {
                 <li class="nav-item">
@@ -245,7 +258,8 @@
         </ul>
     </div>
 
-    <table class="table">
+    <div class="table-container">
+    <table class="table-fixed">
         <thead>
             <tr>
                 <th>ORDER ID</th>
@@ -274,12 +288,20 @@
                             }
                             @totalPrice
                         </td>
-                        <td>
-                            @foreach (var orderItem in orderItemForOrder)
-                            {
-                                <br><span>@orderItem.Drink.name</span><br/>
-                            }
-                        </td>
+                            <td>
+                                @{
+                                    var groupedItems = orderItemForOrder.GroupBy(oi => oi.Drink.name);
+                                }
+                                @foreach (var group in groupedItems)
+                                {
+                                    <br>
+
+                                    <span>@(group.Count()) × @group.Key</span>
+
+                                    <br />
+                                }
+                            </td>
+
                         <td>
                             <form asp-action="Completed">
                                 <input type="hidden" name="id" value="@item.id" />
@@ -301,9 +323,9 @@
             }
         </tbody>
     </table>
+    </div>
 
-
-
+    <h1 style="align-content: center; color: white; text-align: center; ">Menu Items</h1>
     <!-- kod za menu -->
     <div class="carousel">
         @if (ViewBag.Drinks != null)

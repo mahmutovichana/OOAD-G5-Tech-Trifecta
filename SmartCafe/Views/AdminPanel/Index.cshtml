@@ -440,21 +440,56 @@
         </div>
         <div class="statistics-item">
             <span class="statistics-label">Today's Profit</span>
-            <span class="statistics-value">@ViewBag.TodayProfit $</span>
+            <span class="statistics-value" id="todayProfitValue">@ViewBag.TodayProfit $</span>
         </div>
         <div class="statistics-item">
             <span class="statistics-label">Total Profit</span>
-            <span class="statistics-value">@ViewBag.TotalProfit $</span>
+            <span class="statistics-value" id="totalProfitValue">@ViewBag.TotalProfit $</span>
         </div>
         <div class="statistics-item">
             <span class="statistics-label">Number of workers</span>
-            <span class="statistics-value">6</span>
+            <span class="statistics-value" id="numWorkersValue">6</span>
         </div>
         <div class="statistics-item">
             <span class="statistics-label">Number of customers</span>
-            <span class="statistics-value">214185</span>
+            <span class="statistics-value" id="numCustomersValue">4185</span>
         </div>
     </div>
+
+
+    <script>
+        function animateValue(element, start, end, duration) {
+  const range = end - start;
+  const increment = end > start ? 1 : -1;
+  const stepTime = Math.abs(Math.floor(duration / range));
+  const obj = element;
+
+  let current = start;
+
+  const timer = setInterval(() => {
+    current += increment;
+    obj.textContent = current;
+    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+      clearInterval(timer);
+      obj.textContent = end;
+    }
+  }, stepTime);
+}
+
+// Animate statistics values
+const todayProfitValue = document.getElementById('todayProfitValue');
+animateValue(todayProfitValue, 0, @ViewBag.TodayProfit, 2000); // Trajanje animacije je 2000ms (2 sekunde)
+
+const totalProfitValue = document.getElementById('totalProfitValue');
+animateValue(totalProfitValue, 0, @ViewBag.TotalProfit, 2000); // Trajanje animacije je 2000ms (2 sekunde)
+
+const numWorkersValue = document.getElementById('numWorkersValue');
+animateValue(numWorkersValue, 0, 6, 2000); // Trajanje animacije je 2000ms (2 sekunde)
+
+const numCustomersValue = document.getElementById('numCustomersValue');
+animateValue(numCustomersValue, 0, 4185, 2000); // Trajanje animacije je 2000ms (2 sekunde)
+
+    </script>
 
     <div class="most-sold-cocktail">
         <span class="most-sold-cocktail-name"><strong>Most Sold Cocktail </strong><br /> @ViewBag.MostSoldCocktailName</span>
@@ -475,6 +510,7 @@
                 <!-- Modalni prozor za uređivanje -->
                 <div id="modal-@drink.id" class="modal">
                     <div class="modal-content">
+                        
                         <h1>Edit Drink</h1>
                         <form method="post" asp-action="Edit" asp-route-id="@drink.id">
                             <img src="@Url.Content("~/images/" + drink.name + ".jpg")" alt="@drink.name" class="edit-image" />
@@ -534,16 +570,10 @@
         // JavaScript kod za modalni prozor
         var modalItems = document.getElementsByClassName("carousel-item");
         var modals = document.getElementsByClassName("modal");
-        var closeButtons = document.getElementsByClassName("close");
 
         // Prikazuje modalni prozor za određenu stavku
         function showModal(itemIndex) {
             modals[itemIndex].style.display = "block";
-        }
-
-        // Sakriva modalni prozor za određenu stavku
-        function hideModal(itemIndex) {
-            modals[itemIndex].style.display = "none";
         }
 
         // Postavlja događaje za prikazivanje/skrivanje modalnih prozora
@@ -553,12 +583,19 @@
                     showModal(index);
                 });
 
-                closeButtons[index].addEventListener("click", function () {
-                    hideModal(index);
-                });
+                var closeButtons = modals[index].getElementsByClassName("close");
+                for (var j = 0; j < closeButtons.length; j++) {
+                    closeButtons[j].addEventListener("click", function () {
+                        hideModal(index);
+                    });
+                }
+
+                // Sakriva modalni prozor za određenu stavku
+                function hideModal(itemIndex) {
+                    modals[itemIndex].style.display = "none";
+                }
             })(i);
         }
     </script>
-
 </body>
 </html>
