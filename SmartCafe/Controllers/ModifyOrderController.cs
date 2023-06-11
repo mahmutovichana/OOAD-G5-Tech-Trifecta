@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,16 +11,20 @@ using Microsoft.EntityFrameworkCore;
 using SmartCafe.Data;
 using SmartCafe.Interfaces;
 using SmartCafe.Models;
+using Newtonsoft.Json;
 
 namespace SmartCafe.Controllers
 {
     public class ModifyOrderController : Controller, IDrink
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
 
-        public ModifyOrderController(ApplicationDbContext context)
+        public ModifyOrderController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index(string tableNumber, Dictionary<int, int> selectedDrinks)
         {
@@ -42,6 +47,10 @@ namespace SmartCafe.Controllers
             ViewBag.SelectedDrinks = selectedDrinksList;
             ViewBag.TableNumber = tableNumber;
 
+            var selectedDrinksListJson = JsonConvert.SerializeObject(selectedDrinksList);
+            _session.SetString("SelectedDrinksList", selectedDrinksListJson);
+            _session.SetString("TableNumber", tableNumber);
+
             TempData["SelectedDrinksList"] = selectedDrinksList;
             TempData["TableNumber"] = tableNumber;
 
@@ -51,6 +60,12 @@ namespace SmartCafe.Controllers
                 TempData["OrderSaved"] = false; // Resetiramo privremene podatke
             }
 
+            if (RouteData.Values["action".ToString()] == "CancelOrder" && RouteData.Values["controller".ToString()] == "ModifyOrder")
+            {
+                CancelOrder();
+                return RedirectToAction("Index", "Home"); // Dodajte redirekciju nakon što pozovete CancelOrder
+            }
+        
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -59,6 +74,11 @@ namespace SmartCafe.Controllers
         {
             // Delay for 10 secs before calling SaveOrder
             await Task.Delay(10000);
+
+            if (RouteData.Values["action".ToString()] == "CancelOrder" && RouteData.Values["controller".ToString()] == "ModifyOrder")
+            {
+                CancelOrder();
+            }
 
             // Call SaveOrder action
             SaveOrder(selectedDrinksList, tableNumber);
@@ -141,6 +161,11 @@ namespace SmartCafe.Controllers
 
             if (selectedDrinksList != null && tableNumber != null)
             {
+                if (RouteData.Values["action"].ToString() == "CancelOrder" && RouteData.Values["controller"].ToString() == "ModifyOrder")
+                {
+                    CancelOrder();
+                }
+
                 // Pozovi AfterIndex metodu
                 AfterIndex(selectedDrinksList, tableNumber);
             }
@@ -276,31 +301,37 @@ namespace SmartCafe.Controllers
         {
             return _context.Orders.Any(e => e.id == id);
         }
+
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CancelOrder()
         {
-            // Dobivanje stolnog broja narudžbe iz zahtjeva
-            string tableNumber = Request.Form["tableNumber"];
+            var selectedDrinksListJson = _session.GetString("SelectedDrinksList");
+            var selectedDrinksList = JsonConvert.DeserializeObject<List<Tuple<string, int, double>>>(selectedDrinksListJson);
+            var tableNumber = _session.GetString("TableNumber");
 
-            // Provjera uvjeta: order nije označen kao "done" i tableNumber nije null
-            if (!string.IsNullOrEmpty(tableNumber))
+            if (tableNumber != null)
             {
-                var order = _context.Orders.FirstOrDefault(o => o.tableNumber == Int32.Parse(tableNumber) && !o.done);
-                if (order != null)
+                // Provjera uvjeta: order nije označen kao "done" i tableNumber nije null
+                if (!string.IsNullOrEmpty(tableNumber))
                 {
-                    // Pronađene su narudžba i stavke narudžbe koje zadovoljavaju uvjete, pa se brišu iz baze podataka
-                    _context.Orders.Remove(order);
-                    _context.SaveChanges();
+                    var order = _context.Orders.FirstOrDefault(o => o.tableNumber == Int32.Parse(tableNumber) && !o.done);
+                    if (order != null)
+                    {
+                        // Pronađene su narudžba i stavke narudžbe koje zadovoljavaju uvjete, pa se brišu iz baze podataka
+                        _context.Orders.Remove(order);
+                        _context.SaveChanges();
 
-                    // Ovdje možete dodati dodatnu logiku ili poruke za prikaz korisniku
+                        // Ovdje možete dodati dodatnu logiku ili poruke za prikaz korisniku
 
-                    // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
-                    return RedirectToAction("Index", "Home");
+                        // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
             }
-
-            // Ako nijedna narudžba nije zadovoljila uvjete, vraća se ista stranica ili prikazuje poruka o pogrešci
-            return View();
+            // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
+            return RedirectToAction("Index", "Home");
         }
 
     }

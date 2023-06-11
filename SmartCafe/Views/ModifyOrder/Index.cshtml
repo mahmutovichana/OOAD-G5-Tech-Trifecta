@@ -9,7 +9,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
+@{
+    List<Tuple<string, int, double>> selectedDrinksList = ViewBag.SelectedDrinksList;
+    string tableNumber = ViewBag.TableNumber;
+}
 
 <!DOCTYPE html>
 <html>
@@ -242,21 +245,28 @@
             <p>Need to make a change to your order? No problem! You can cancel or modify your order within the next 3 minutes. After that, it will be sent to the bar for preparation.</p>
         </div>
 
-        <div class="buttons">
-            <h1>Order details</h1>
-            <button class="btn" id="modify-order-btn" type="button">Modify</button>
-            <form id="cancel-order-form" method="post" action="@Url.Action("CancelOrder", "ModifyOrder")">
-                <button class="btn" id="cancel-order-btn" type="submit">Cancel</button>
-            </form>
+        @using (Html.BeginForm("CancelOrder", "ModifyOrder", FormMethod.Post, new { id = "cancel-form-id" }))
+        {
+                @Html.AntiForgeryToken()
+            <div class="buttons">
+                <h1>Order details</h1>
+                <button class="btn" id="modify-order-btn" type="button">Modify</button>
+                <input type="hidden" name="cancelButtonClicked" id="cancel-button-clicked" value="false" />
+                <button class="btn" id="cancel-order-btn" type="button" asp-controller="ModifyOrder" asp-action="CancelOrder">Cancel</button>
+            </div>
+        }
 
+     <script>
+            const modifyOrderButton = document.getElementById('modify-order-btn');
+            modifyOrderButton.addEventListener('click', function () {
+                history.back();
+            });
 
-        </div>
-    </div>
-    <script>
-        const modifyOrderButton = document.getElementById('modify-order-btn');
-        modifyOrderButton.addEventListener('click', function () {
-            history.back();
-        });
+            const cancelButton = document.getElementById('cancel-order-btn');
+            cancelButton.addEventListener('click', function () {
+                document.getElementById('cancel-button-clicked').value = 'true';
+                document.getElementById('cancel-form-id').submit();
+            });
 
         // Extract and display Table Number
         /*
@@ -360,12 +370,6 @@
         function padNumber(number) {
             return number.toString().padStart(2, '0');
         }*/
-    </script>
-    <script>
-        const cancelOrderForm = document.getElementById('cancel-order-form');
-        cancelOrderForm.addEventListener('submit', function () {
-           
-        });
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

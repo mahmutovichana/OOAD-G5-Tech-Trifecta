@@ -130,47 +130,29 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            margin-right: 50px;
-            flex-grow: 1;
+            margin-left: 50px;
+            width: 800px;
         }
 
             .computer img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
+                position: relative;
                 width: 100%;
                 height: auto;
-                transform: translate(-50%, -50%);
-                z-index: 1;
+                margin-top:0%;
             }
 
-
-            .computer #gif {
+            .computer .gif {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                width: 90%;
-                height: auto;
                 transform: translate(-50%, -50%);
                 z-index: 2;
-                background-image: url('/images/cafeAtmosphere.jpg');
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-                opacity: 0.8;
-            }
-
-
-            .computer img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 100%;
+                width: 49%;
                 height: auto;
-                -webkit-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-                z-index: 1;
+                margin-top: -0.5%;
             }
+
+
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -192,9 +174,10 @@
     <div class="login-container">
 
         <div class="computer">
-            <img src="https://www.bebold.ch/img/home/macbook-white.png" alt="MacBook Computer Apple">
-            <div id="gif" style="background-position-y: 50%;"></div>
+            <img class="macbook-image" src="https://www.bebold.ch/img/home/macbook-white.png" alt="MacBook Computer Apple">
+            <img class="gif" src="/images/bartenderMakingDrink.jpg" alt="Bartender Sippin'">
         </div>
+
 
         <div class="login-form">
             <h2>Serving Up Success: Lagoon Staff Login</h2>
