@@ -318,7 +318,7 @@
 
         <div class="dropdown">
             <button class="dropbtn" id="dropdown-button">Select your table number</button>
-            <button class="ok-button" id="ok-button" type="button">OK</button>
+            <button class="ok-button" id="ok-button" type="button" disabled>OK</button>
             <div class="dropdown-content">
                 <a data-table="1" onclick="changeButtonText('1')">1</a>
                 <a data-table="2" onclick="changeButtonText('2')">2</a>
@@ -330,9 +330,12 @@
             function changeButtonText(text) {
                 document.getElementById("dropdown-button").textContent = text;
             }
-        </script>
 
-        <script>
+            function changeButtonText(text) {
+                document.getElementById("dropdown-button").textContent = text;
+                document.getElementById("ok-button").disabled = false; // Enable the OK button
+            }
+
             document.getElementById('ok-button').addEventListener('click', function () {
                 window.location.href = '/MenuPage/Index';
             });
