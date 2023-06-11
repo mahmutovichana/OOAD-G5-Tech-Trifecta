@@ -82,44 +82,10 @@ namespace SmartCafe.Controllers
             }
         }
 
-
-
-
-
         // GET: StaffLoginController/Login
         public ActionResult Login()
         {
             return View();
-        }
-
-        // POST: StaffLoginController/Login
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(IFormCollection collection)
-        {
-            try
-            {
-                // Proverite korisničke podatke i izvršite logiku prijave
-
-                // Na osnovu rezultata prijave, možete preusmeriti korisnika na odgovarajuću stranicu
-                // Na primer:
-                if (prijavaUspela)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    // U slučaju neuspešne prijave, možete prikazati odgovarajuću poruku ili vratiti korisnika na istu stranicu za prijavu
-                    ModelState.AddModelError("", "Pogrešno korisničko ime ili lozinka");
-                    return View();
-                }
-            }
-            catch
-            {
-                // U slučaju greške, prikažite odgovarajuću poruku ili vratite korisnika na istu stranicu za prijavu
-                ModelState.AddModelError("", "Došlo je do greške prilikom prijave");
-                return View();
-            }
         }
     }
 }

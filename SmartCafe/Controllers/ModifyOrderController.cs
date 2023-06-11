@@ -63,7 +63,7 @@ namespace SmartCafe.Controllers
             if (RouteData.Values["action".ToString()] == "CancelOrder" && RouteData.Values["controller".ToString()] == "ModifyOrder")
             {
                 CancelOrder();
-                return RedirectToAction("Index", "Home"); // Dodajte redirekciju nakon što pozovete CancelOrder
+                return RedirectToAction("Index", "Home"); 
             }
         
             return View(await applicationDbContext.ToListAsync());
@@ -105,7 +105,7 @@ namespace SmartCafe.Controllers
                             done = false,
                             tableNumber = int.Parse(tableNumber),
                             orderTime = DateTime.Now,
-                            Guest = new Guest() // Zamijeni sa stvarnim gostom
+                            Guest = new Guest() 
                         };
 
                         context.Orders.Add(order);
@@ -323,14 +323,10 @@ namespace SmartCafe.Controllers
                         _context.Orders.Remove(order);
                         _context.SaveChanges();
 
-                        // Ovdje možete dodati dodatnu logiku ili poruke za prikaz korisniku
-
-                        // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
                         return RedirectToAction("Index", "Home");
                     }
                 }
             }
-            // Redirekcija na početnu stranicu ili drugu stranicu po potrebi
             return RedirectToAction("Index", "Home");
         }
 
