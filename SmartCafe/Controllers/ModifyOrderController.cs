@@ -62,6 +62,7 @@ namespace SmartCafe.Controllers
 
             // Call SaveOrder action
             SaveOrder(selectedDrinksList, tableNumber);
+         
         }
 
         [HttpPost]
@@ -89,6 +90,12 @@ namespace SmartCafe.Controllers
 
                         context.Orders.Add(order);
                         await context.SaveChangesAsync(); // Spremi narudžbu kako bismo dobili ID
+                    }
+                    else
+                    {
+                        // Ako postoji već narudžba za stol, ažuriraj je
+                        var existingOrderItems = context.OrderItems.Where(oi => oi.idOrder == order.id);
+                        context.OrderItems.RemoveRange(existingOrderItems);
                     }
 
                     foreach (var tuple in selectedDrinksList)
@@ -119,8 +126,9 @@ namespace SmartCafe.Controllers
                 }
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
+
 
 
         public override void OnActionExecuted(ActionExecutedContext context)

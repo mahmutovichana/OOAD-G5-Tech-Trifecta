@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj": {}
+    "C:\\Users\\User-PC\\Desktop\\OOAD-G3-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj": {
+    "C:\\Users\\User-PC\\Desktop\\OOAD-G3-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj",
+        "projectUniqueName": "C:\\Users\\User-PC\\Desktop\\OOAD-G3-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj",
         "projectName": "SmartCafe",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\OOAD-G5-Tech-Trifecta\\SmartCafe\\obj\\",
+        "projectPath": "C:\\Users\\User-PC\\Desktop\\OOAD-G3-Tech-Trifecta\\SmartCafe\\SmartCafe.csproj",
+        "packagesPath": "C:\\Users\\User-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User-PC\\Desktop\\OOAD-G3-Tech-Trifecta\\SmartCafe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
