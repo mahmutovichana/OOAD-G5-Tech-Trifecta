@@ -72,8 +72,8 @@ namespace SmartCafe.Controllers
 
         public async Task AfterIndex(List<Tuple<string, int, double>> selectedDrinksList, string tableNumber)
         {
-            // Delay for 10 secs before calling SaveOrder
-            await Task.Delay(10000);
+            // Delay for 3 mins before calling SaveOrder
+            await Task.Delay(180000);
 
             if (RouteData.Values["action".ToString()] == "CancelOrder" && RouteData.Values["controller".ToString()] == "ModifyOrder")
             {
